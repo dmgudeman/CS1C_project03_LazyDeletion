@@ -4,27 +4,27 @@ import java.util.NoSuchElementException;
 public class LazySearchTree<E extends Comparable< ? super E > >
    implements Cloneable
 {
-   class FHLazySTNode<E extends Comparable< ? super E > >
+   protected class LazySTNode<E extends Comparable< ? super E > >
    {
       // use public access so the tree or other classes can access members 
-      public FHLazySTNode<E> lftChild, rtChild;
+      public LazySTNode<E> lftChild, rtChild;
       public E data;
-      public FHLazySTNode<E> myRoot;  // needed to test for certain error
+      public LazySTNode<E> myRoot;  // needed to test for certain error
       public boolean deleted;
     
 
-      public FHLazySTNode( E d, FHLazySTNode<E> lft, FHLazySTNode<E> rt)
+      public LazySTNode( E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del)
       {
          lftChild = lft; 
          rtChild = rt;
          data = d;
-         deleted = false;
+         deleted = del;
       }
       
-      public FHLazySTNode()
+      public LazySTNode()
       {
-         this(null, null, null);
-         deleted = false;
+         this(null, null, null, false);
+        
       }
       
       // function stubs -- for use only with AVL Trees when we extend
@@ -33,13 +33,13 @@ public class LazySearchTree<E extends Comparable< ? super E > >
    }
    
    protected int mSize;
-   protected FHLazySTNode<E> mRoot;
-   private int mSizeHard;
+   protected LazySTNode<E> mRoot;
+   protected int mSizeHard;
    
    public LazySearchTree() { clear(); }
    public boolean empty() { return (mSize == 0); }
    public int size() { return mSize; }
-   public void clear() { mSize = 0; mRoot = null; }
+   public void clear() { mSize = 0; mSizeHard = 0; mRoot = null; }
    public int showHeight() { return findHeight(mRoot, -1); }
    
    public int sizeHard()
@@ -63,7 +63,7 @@ public class LazySearchTree<E extends Comparable< ? super E > >
    
    public E find( E x )
    {
-      FHLazySTNode<E> resultNode;
+      LazySTNode<E> resultNode;
       resultNode = find(mRoot, x);
       if (resultNode == null)
          throw new NoSuchElementException();
@@ -74,14 +74,14 @@ public class LazySearchTree<E extends Comparable< ? super E > >
    public boolean insert( E x )
    {
       int oldSize = mSize;
-      mRoot = insert(mRoot, x);
+      mRoot = insert(mRoot, x);   
       return (mSize != oldSize);
    }
    
    public boolean remove( E x )
    {
       int oldSize = mSize;
-      mRoot = remove(mRoot, x);
+      remove(mRoot, x);
       return (mSize != oldSize);
    }
    
@@ -103,7 +103,7 @@ public class LazySearchTree<E extends Comparable< ? super E > >
    }
    
    // private helper methods ----------------------------------------
-   protected FHLazySTNode<E> findMin( FHLazySTNode<E> root ) 
+   protected LazySTNode<E> findMin( LazySTNode<E> root ) 
    {
       if (root == null)
          return null;
@@ -112,7 +112,7 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       return findMin(root.lftChild);
    }
    
-   protected FHLazySTNode<E> findMax( FHLazySTNode<E> root ) 
+   protected LazySTNode<E> findMax( LazySTNode<E> root ) 
    {
       if (root == null)
          return null;
@@ -121,14 +121,15 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       return findMax(root.rtChild);
    }
    
-   protected FHLazySTNode<E> insert( FHLazySTNode<E> root, E x )
+   protected LazySTNode<E> insert( LazySTNode<E> root, E x )
    {
       int compareResult;  // avoid multiple calls to compareTo()
       
       if (root == null)
       {
          mSize++;
-         return new FHLazySTNode<E>(x, null, null);
+         mSizeHard++;
+         return new LazySTNode<E>(x, null, null, false);
       }
       
       compareResult = x.compareTo(root.data); 
@@ -140,46 +141,28 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       return root;
    }
 
-   protected FHLazySTNode<E> remove( FHLazySTNode<E> root, E x  )
+   protected void remove( LazySTNode<E> root, E x  )
    {
-      int compareResult;  // avoid multiple calls to compareTo()
-     
-      if (root == null)
-         return null;
-
-      compareResult = x.compareTo(root.data); 
-      if ( compareResult < 0 )
-         root.lftChild = remove(root.lftChild, x);
-      else if ( compareResult > 0 )
-         root.rtChild = remove(root.rtChild, x);
-
-      // found the node
-      else if (root.lftChild != null && root.rtChild != null)
-      {
-         root.data = findMin(root.rtChild).data;
-         root.rtChild = remove(root.rtChild, root.data);
-      }
-      else
-      {
-         root =
-            (root.lftChild != null)? root.lftChild : root.rtChild;
+      
+      find(root, x).deleted = true;  
          mSize--;
-      }
-      return root;
+      
+ 
    }
    
    protected <F extends Traverser<? super E>> 
-   void traverse(F func, FHLazySTNode<E> treeNode)
+   void traverse(F func, LazySTNode<E> treeNode)
    {
       if (treeNode == null)
          return;
 
       traverse(func, treeNode.lftChild);
-      func.visit(treeNode.data);
+      if(!treeNode.deleted)
+         func.visit(treeNode.data);
       traverse(func, treeNode.rtChild);
    }
    
-   protected FHLazySTNode<E> find( FHLazySTNode<E> root, E x )
+   protected LazySTNode<E> find( LazySTNode<E> root, E x )
    {
       int compareResult;  // avoid multiple calls to compareTo()
 
@@ -191,26 +174,29 @@ public class LazySearchTree<E extends Comparable< ? super E > >
          return find(root.lftChild, x);
       if (compareResult > 0)
          return find(root.rtChild, x);
-      return root;   // found
+      if (!root.deleted)
+         return root;   // found
+      return null;
    }
    
-   protected FHLazySTNode<E> cloneSubtree(FHLazySTNode<E> root)
+   protected LazySTNode<E> cloneSubtree(LazySTNode<E> root)
    {
-      FHLazySTNode<E> newNode;
+      LazySTNode<E> newNode;
       if (root == null)
          return null;
 
       // does not set myRoot which must be done by caller
-      newNode = new FHLazySTNode<E>
+      newNode = new LazySTNode<E>
       (
          root.data, 
          cloneSubtree(root.lftChild), 
-         cloneSubtree(root.rtChild)
+         cloneSubtree(root.rtChild),
+         root.deleted
       );
       return newNode;
    }
    
-   protected int findHeight( FHLazySTNode<E> treeNode, int height ) 
+   protected int findHeight( LazySTNode<E> treeNode, int height ) 
    {
       int leftHeight, rightHeight;
       if (treeNode == null)
