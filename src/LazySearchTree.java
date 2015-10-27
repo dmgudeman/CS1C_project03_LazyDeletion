@@ -35,7 +35,7 @@ public class LazySearchTree<E extends Comparable< ? super E > >
    protected int mSize;
    protected LazySTNode<E> mRoot;
    protected int mSizeHard;
-   protected LazySTNode<E> nonExistant = new LazySTNode<>();;
+ 
    
    
    public LazySearchTree() { clear(); }
@@ -68,10 +68,8 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       LazySTNode<E> resultNode;
       resultNode = find(mRoot, x);
       if (resultNode == null)
-      {
-         System.out.println("The value " + x + " is not found.");        
-         return nonExistant.data;        
-      }
+         throw new NoSuchElementException();
+      
       return resultNode.data;
    }
    
@@ -177,8 +175,7 @@ public class LazySearchTree<E extends Comparable< ? super E > >
    { 
       if (root == null)
          return null;
-
-     
+   
       if ( root.lftChild.deleted )
          root.lftChild = removeHard(root.lftChild);
       else if ( root.rtChild.deleted )
@@ -187,9 +184,13 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       // found the node
       else if (root.lftChild != null && root.rtChild != null && root.deleted)
       {
-         root.data = findMin(root.rtChild).data;
-         root.rtChild = removeHard(root.rtChild);
-      }
+        
+         
+        root.data = findMin(root.rtChild).data;
+        root.rtChild = removeHard(root.rtChild);
+        root.deleted = false;
+        
+         }
       else
       {
          root =
