@@ -257,7 +257,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          
          root.data = removeHard(findMin(root.rtChild)).data;
          mSizeHard--;
-         root.deleted = false;
+       //  root.deleted = false;
       } else
       {
          root = (root.lftChild != null) ? root.lftChild : root.rtChild;// 4
