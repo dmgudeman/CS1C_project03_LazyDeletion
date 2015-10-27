@@ -35,6 +35,8 @@ public class LazySearchTree<E extends Comparable< ? super E > >
    protected int mSize;
    protected LazySTNode<E> mRoot;
    protected int mSizeHard;
+   protected LazySTNode<E> nonExistant = new LazySTNode<>();;
+   
    
    public LazySearchTree() { clear(); }
    public boolean empty() { return (mSize == 0); }
@@ -66,9 +68,13 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       LazySTNode<E> resultNode;
       resultNode = find(mRoot, x);
       if (resultNode == null)
-         throw new NoSuchElementException();
+      {
+         System.out.println("The value " + x + " is not found.");        
+         return nonExistant.data;        
+      }
       return resultNode.data;
    }
+   
    public boolean contains(E x)  { return find(mRoot, x) != null; }
    
    public boolean insert( E x )
@@ -152,44 +158,50 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       return root;
    }
 
-   protected void remove( LazySTNode<E> root, E x  )
+   protected boolean remove( LazySTNode<E> root, E x  )
    {
-      
-      find(root, x).deleted = true;  
+      if (root == null)
+         return false;
+      if (find(x) != null)
+      {
+        find(root, x).deleted = true;  
          mSize--;
+         return true;
+      }
+      else {
+         return false;
+      }
    }
   
-   protected LazySTNode<E> removeHard( LazySTNode<E> root, E x  )
-   {
-      int compareResult;  // avoid multiple calls to compareTo()
-     
+   protected LazySTNode<E> removeHard( LazySTNode<E> root )
+   { 
       if (root == null)
          return null;
 
-      compareResult = x.compareTo(root.data); 
-      if ( compareResult < 0 )
-         root.lftChild = removeHard(root.lftChild, x);
-      else if ( compareResult > 0 )
-         root.rtChild = removeHard(root.rtChild, x);
+     
+      if ( root.lftChild.deleted )
+         root.lftChild = removeHard(root.lftChild);
+      else if ( root.rtChild.deleted )
+         root.rtChild = removeHard(root.rtChild);
 
       // found the node
-      else if (root.lftChild != null && root.rtChild != null)
+      else if (root.lftChild != null && root.rtChild != null && root.deleted)
       {
          root.data = findMin(root.rtChild).data;
-         root.rtChild = removeHard(root.rtChild, root.data);
+         root.rtChild = removeHard(root.rtChild);
       }
       else
       {
          root =
             (root.lftChild != null)? root.lftChild : root.rtChild;
-         mSize--;
+         mSizeHard--;
       }
       return root;
    }
    
    protected void collectGarbage(LazySTNode mRoot)
    {
-      
+      removeHard(mRoot);
    }
    
    protected <F extends Traverser<? super E>> 
