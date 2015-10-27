@@ -85,6 +85,17 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       return (mSize != oldSize);
    }
    
+   public boolean collectGarbage()
+   {
+      this.collectGarbage(mRoot);
+      return true;
+   }
+   public boolean removeHard( E x )
+   {
+      int oldSize = mSize;
+      remove(mRoot, x);
+      return (mSize != oldSize);
+   }
    public < F extends Traverser<? super E > > 
    void traverse(F func)
    {
@@ -146,8 +157,39 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       
       find(root, x).deleted = true;  
          mSize--;
+   }
+  
+   protected LazySTNode<E> removeHard( LazySTNode<E> root, E x  )
+   {
+      int compareResult;  // avoid multiple calls to compareTo()
+     
+      if (root == null)
+         return null;
+
+      compareResult = x.compareTo(root.data); 
+      if ( compareResult < 0 )
+         root.lftChild = removeHard(root.lftChild, x);
+      else if ( compareResult > 0 )
+         root.rtChild = removeHard(root.rtChild, x);
+
+      // found the node
+      else if (root.lftChild != null && root.rtChild != null)
+      {
+         root.data = findMin(root.rtChild).data;
+         root.rtChild = removeHard(root.rtChild, root.data);
+      }
+      else
+      {
+         root =
+            (root.lftChild != null)? root.lftChild : root.rtChild;
+         mSize--;
+      }
+      return root;
+   }
+   
+   protected void collectGarbage(LazySTNode mRoot)
+   {
       
- 
    }
    
    protected <F extends Traverser<? super E>> 
@@ -206,6 +248,21 @@ public class LazySearchTree<E extends Comparable< ? super E > >
       rightHeight = findHeight(treeNode.rtChild, height);
       return (leftHeight > rightHeight)? leftHeight : rightHeight;
    }
+  
+   class DeleteObject<E> implements Traverser<E>
+   {
+      public void visit(E x)
+      {
+         
+         
+     
+      }
+
+     
+
+    
+   }
+
 }
 
 
