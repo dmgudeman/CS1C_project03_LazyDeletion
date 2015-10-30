@@ -141,7 +141,10 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    public boolean removeHard(E x)
    {
       int oldSize = mSize;
-      removeHard(mRoot, x);
+      LazySTNode<E> temp = removeHard(mRoot, x);
+      System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX");
+      printNode(temp);
+      if (temp.equals(mRoot)) mRoot = temp;
       return (mSize != oldSize);
    }
 
@@ -337,12 +340,13 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       // found the node
       else if (root.lftChild != null && root.rtChild != null)
       {
-        if(!root.deleted) mSize--;
          
-            putativeRightChild_min = remove(root, (findMin(root.rtChild).data));
-       //  putativeRightChild_min = findMin(root.rtChild);
+         putativeRightChild_min = findMinHard(root.rtChild);
+         
          root.data = putativeRightChild_min.data;
          root.deleted = putativeRightChild_min.deleted;
+         LazySTNode<E> temp = remove(root.rtChild, root.data);
+         if (!temp.deleted) mSize--;
          mSizeHard--;
        
        //  putativeRightChild_min.deleted = true;
@@ -427,18 +431,31 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
 
    }
+   public void showTreeHard (LazySearchTree tree)
+   {  System.out.println("-----------------------------");
+      System.out.println("The showTreeHard method. ");
+      System.out.println("The mRoot is: " + tree.mRoot.data );
+  
+      showTreeHard(this.mRoot);
+      System.out.print(" " + mRoot.data);
+      System.out.println("\n-----------------------------");
+   }
 
-   public void traversey(LazySTNode<E> root)
-   { // Each child of a tree is a root of its subtree.
+   protected void showTreeHard(LazySTNode<E> root)
+   { 
       if (root.lftChild != null)
       {
-         traversey(root.lftChild);
+         showTreeHard(root.lftChild);
+         System.out.print(root.lftChild.data + " ");
       }
-      System.out.print(root.data + ", ");
       if (root.rtChild != null)
       {
-         traversey(root.rtChild);
+         showTreeHard(root.rtChild);
+         System.out.print(root.rtChild.data + " ");
       }
+//      if (root != null)
+//      System.out.println(root.data);
+     
    }
 
    class DeleteObject<E> implements Traverser<E>

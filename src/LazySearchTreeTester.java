@@ -1,6 +1,10 @@
 
+
+
+
 public class LazySearchTreeTester
 {
+  
 
    public void stateOfTree(LazySearchTree tree)
    {
@@ -8,6 +12,7 @@ public class LazySearchTreeTester
       this.showMin(tree);
       this.showMax(tree);    
       this.showSizes(tree);
+
       System.out.println("=======================================\n");
       
       
@@ -43,4 +48,6 @@ public class LazySearchTreeTester
       System.out.println("The mSize is: " + tree.mSize);
       System.out.println("The mSizeHard is: " + tree.mSizeHard);
    }
+   
+  
 }
