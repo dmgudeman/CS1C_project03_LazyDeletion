@@ -27,16 +27,17 @@ public class tester
       // System.out.println("find function should equal 60:   " +
       // testTree.find(60));
       tester.stateOfTree(testTree);
-      System.out.println("Soft removed 67 ");
+      System.out.println("Soft removed 67, 70 and 80");
       testTree.remove(67);
-      tester.stateOfTree(testTree);
-      System.out.println("Hard removed 67 ");
-      testTree.removeHard(67);
-      tester.stateOfTree(testTree);
-      // testTree.remove(70);
-      // testTree.remove(81);
     
+     // System.out.println("Hard removed 67 ");
+     // testTree.removeHard(67);
+     
+      testTree.remove(70);
+      testTree.remove(80);
       tester.stateOfTree(testTree);
+    
+    
       testTree.traverse(printObject);
    
 

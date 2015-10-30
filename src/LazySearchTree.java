@@ -213,11 +213,37 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    protected LazySTNode<E> findMax(LazySTNode<E> root)
    {
+      // sorry for the lengthy name but helps me conceptualize this process.
+      LazySTNode<E> putativeRtChild_Max;
+
       if (root == null)
          return null;
-      if (root.rtChild == null)
+
+      // march down the right side of tree until the rtChild becomes null
+      // assigning it to putativeRtChild_Max node sequentially putting it
+      // on a stack - unwinding down the tree.
+      putativeRtChild_Max = findMax(root.rtChild);
+
+      // when it hits the bottom it the last nodes left child will be null
+      // so it falls through this filter. Otherwise it is returned to the
+      // findMax call immediately above. When this is done winding back up
+      // the max falls through the the last return root statement.
+      if (putativeRtChild_Max != null)
+      {
+         return putativeRtChild_Max;
+      }
+
+      // if the putativeRtChild_Max has fallen through a not-null filter
+      // need to check it to see if it has been soft deleted so...
+      if (root.deleted)
+      {
+         // need to check the lftChild since the right node could be extant
+         // but "deleted" and if it were hard deleted it would not be here
+         return findMax(root.lftChild);
+      } else
+      {
          return root;
-      return findMax(root.rtChild);
+      }
    }
 
    protected LazySTNode<E> findMaxHard(LazySTNode<E> root)
