@@ -19,6 +19,7 @@ import java.util.Scanner;
  */
 class PrintObject<E> implements Traverser<E>
 {
+   
    public void visit(E x)
    {
       System.out.print( x + " ");
@@ -32,9 +33,11 @@ class PrintObject<E> implements Traverser<E>
  */
 public class SuperMarket 
 {
+  
 	public static final boolean SHOW_DETAILS = true;
 
 	/* Define an attribute called "inventory" of type LazySearchTree */
+	LazySearchTree<LazySTNode> inventory = new LazySearchTree<>();
 
 	public int getInventorySize()
 	{	return inventory.sizeHard(); }

@@ -82,11 +82,25 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return findMin(mRoot).data;
    }
 
+   public E findMinHard()
+   {
+      if (mRoot == null)
+         throw new NoSuchElementException();
+      return findMinHard(mRoot).data;
+   }
+
    public E findMax()
    {
       if (mRoot == null)
          throw new NoSuchElementException();
       return findMax(mRoot).data;
+   }
+
+   public E findMaxHard()
+   {
+      if (mRoot == null)
+         throw new NoSuchElementException();
+      return findMaxHard(mRoot).data;
    }
 
    public E find(E x)
@@ -127,7 +141,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    public boolean removeHard(E x)
    {
       int oldSize = mSize;
-      remove(mRoot, x);
+      removeHard(mRoot, x);
       return (mSize != oldSize);
    }
 
@@ -150,11 +164,51 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    // private helper methods ----------------------------------------
    protected LazySTNode<E> findMin(LazySTNode<E> root)
    {
+      // sorry for the lengthy name but helps me conceptualize this process.
+      LazySTNode<E> putativeLeftChild_Min;
+
       if (root == null)
          return null;
-      if (root.lftChild == null)
+
+      // march down the left side of tree until the lftChild becomes null
+      // assigning it to putativeLeftChild_Min node sequentially putting it
+      // on a stack - unwinding down the tree.
+      putativeLeftChild_Min = findMin(root.lftChild);
+
+      // when it hits the bottom it the last nodes left child will be null
+      // so it falls through this filter. Otherwise it is returned to the
+      // findMin call immediately above. When this is done winding back up
+      // the min falls through the the last return root statement.
+      if (putativeLeftChild_Min != null)
+      {
+         return putativeLeftChild_Min;
+      }
+
+      // if the putativeLeftChild_Min has fallen through a not-null filter
+      // need to check it to see if it has been soft deleted so...
+      if (root.deleted)
+      {
+         // need to check the rtChild since the left node could be extant
+         // but "deleted" and if it were hard deleted it would not be here
+         return findMin(root.rtChild);
+      } else
+      {
          return root;
-      return findMin(root.lftChild);
+      }
+   }
+
+   protected LazySTNode<E> findMinHard(LazySTNode<E> root)
+   {
+      if (root == null)
+         return null;
+
+      if (root.lftChild != null)
+      {
+         return findMinHard(root.lftChild);
+      } else
+      {
+         return root;
+      }
    }
 
    protected LazySTNode<E> findMax(LazySTNode<E> root)
@@ -164,6 +218,20 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       if (root.rtChild == null)
          return root;
       return findMax(root.rtChild);
+   }
+
+   protected LazySTNode<E> findMaxHard(LazySTNode<E> root)
+   {
+      if (root == null)
+         return null;
+
+      if (root.rtChild != null)
+      {
+         return findMaxHard(root.rtChild);
+      } else
+      {
+         return root;
+      }
    }
 
    protected LazySTNode<E> insert(LazySTNode<E> root, E x)
@@ -186,97 +254,82 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return root;
    }
 
-   protected boolean remove(LazySTNode<E> root, E x)
+   protected LazySTNode<E> remove(LazySTNode<E> root, E x)
    {
       if (root == null)
-         return false;
+         return null;
       if (find(x) != null)
       {
          find(root, x).deleted = true;
          mSize--;
-         return true;
+         return root;
       } else
       {
-         return false;
+         return null;
       }
    }
 
-   protected LazySTNode<E> removeHard(LazySTNode<E> root)
+   protected LazySTNode<E> collectGarbage(LazySTNode<E> mRoot)
    {
-      
+
+      if (mRoot.rtChild != null)
+      {
+         collectGarbage(mRoot.rtChild);
+      }
+      if (mRoot.lftChild != null)
+      {
+         collectGarbage(mRoot.lftChild);
+      }
+      if (mRoot.deleted)
+      {
+        mRoot =  removeHard(mRoot, mRoot.data);
+
+      }
+      return mRoot;
+      // System.out.println(mRoot.data);
+
+      // removeHard(mRoot);
+      // removeHard(mRoot.lftChild);
+      // removeHard(mRoot.rtChild);
+
+   }
+
+   protected LazySTNode<E> removeHard(LazySTNode<E> root, E x)
+   {
+      int compareResult; // avoid multiple calls to compareTo()
+      LazySTNode<E> putativeRightChild_min;
+         
       if (root == null)
          return null;
-      
 
-      if (root.lftChild != null && root.lftChild.deleted) // 1
-      {
-         if (DEBUG)
-         {
-            System.out.println("removeHard Step 1");
-            printNode(root);
-            printNode(root.lftChild);
-            printNode(root.rtChild);
-            System.out.println("mSizeHard: " + mSizeHard );
-         }
+      compareResult = x.compareTo(root.data);
+      if (compareResult < 0)
+         root.lftChild = removeHard(root.lftChild, x);
+      else if (compareResult > 0)
+         root.rtChild = removeHard(root.rtChild, x);
 
-         root.lftChild = removeHard(root.lftChild);
-         mSizeHard--;
-      } else if (root.rtChild != null && root.rtChild.deleted) // 2
-      {
-         if (DEBUG)
-         {
-            System.out.println("removeHard Step 2");
-            printNode(root);
-            printNode(root.lftChild);
-            printNode(root.rtChild);
-            System.out.println("mSizeHard: " + mSizeHard );
-         }
-         root.rtChild = removeHard(root.rtChild);
-         mSizeHard--;
-      }
       // found the node
-      else if (root.lftChild != null && root.rtChild != null && root.deleted) // 3
+      else if (root.lftChild != null && root.rtChild != null)
       {
-         if (DEBUG)
-         {
-            System.out.println("removeHard Step 3.0");
-            printNode(root);
-            printNode(root.lftChild);
-            printNode(root.rtChild);
-            System.out.println("mSizeHard: " + mSizeHard );
-         }
-//         root.data = findMin(root.rtChild).data;
-//         if (DEBUG)
-//         {
-//            System.out.println("removeHard Step 3.1");
-//            printNode(root);
-//            printNode(root.lftChild);
-//            printNode(root.rtChild);
-//            System.out.println("mSizeHard: " + mSizeHard );
-//         }
+        if(!root.deleted) mSize--;
          
-         root.data = removeHard(findMin(root.rtChild)).data;
+            putativeRightChild_min = remove(root, (findMin(root.rtChild).data));
+       //  putativeRightChild_min = findMin(root.rtChild);
+         root.data = putativeRightChild_min.data;
+         root.deleted = putativeRightChild_min.deleted;
          mSizeHard--;
-       //  root.deleted = false;
+       
+       //  putativeRightChild_min.deleted = true;
+       //  root.deleted = findMinHard(root.rtChild).deleted;
+      //   root.rtChild = this.removeHard(root, root.data);
       } else
       {
-         root = (root.lftChild != null) ? root.lftChild : root.rtChild;// 4
-         System.out.println("444444444444444444444444444444");
-         printNode(root);
-         System.out.println("mSizeHard: " + mSizeHard );
-        // mSizeHard--;
+       if (!root.deleted) mSize--;
+         root = (root.lftChild != null) ? root.lftChild : root.rtChild;
+        mSizeHard--;
       }
-      System.out.println("returning node " );
-      System.out.println("mSizeHard: " + mSizeHard );
+    
       return root;
-   }
-
-   protected void collectGarbage(LazySTNode<E> mRoot)
-   {
-      removeHard(mRoot);
-      removeHard(mRoot.lftChild);
-      removeHard(mRoot.rtChild);
-     
    }
 
    protected <F extends Traverser<? super E>> void traverse(F func,
@@ -332,18 +385,33 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    }
 
    protected void printNode(LazySTNode<E> node)
-   {  
-      if( node != null)
+   {
+      if (node != null)
       {
-      System.out.println("node.data: " + node.data);
-      if (node.rtChild != null)
-         System.out.println("\tnode.rtChild: " + node.rtChild.data);
-      if (node.lftChild != null)
-         System.out.println("\tnode.lftChild: " + node.lftChild.data);    
-      System.out.println("\tnode.deleted: " + node.deleted);
-      System.out.println();
-      } else {
+         System.out.println("node.data: " + node.data);
+         if (node.rtChild != null)
+            System.out.println("\tnode.rtChild: " + node.rtChild.data);
+         if (node.lftChild != null)
+            System.out.println("\tnode.lftChild: " + node.lftChild.data);
+         System.out.println("\tnode.deleted: " + node.deleted);
+         System.out.println();
+      } else
+      {
          System.out.println("this node is null.");
+      }
+
+   }
+
+   public void traversey(LazySTNode<E> root)
+   { // Each child of a tree is a root of its subtree.
+      if (root.lftChild != null)
+      {
+         traversey(root.lftChild);
+      }
+      System.out.print(root.data + ", ");
+      if (root.rtChild != null)
+      {
+         traversey(root.rtChild);
       }
    }
 
