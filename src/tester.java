@@ -43,16 +43,31 @@ public class tester
       System.out.println();
       testTree.showTreeHard(testTree);
 
-     // System.out.println("Hard removed 75 ");
-     // testTree.removeHard(75);
+      // System.out.println("Hard removed 75 ");
+      // testTree.removeHard(75);
 
       // testTree.removeHard(80);
 
-    //  tester.stateOfTree(testTree);
-   //   System.out.print("Tree by PrintObject: ");
-     // testTree.traverse(printObject);
-    //  System.out.println();
-    //  testTree.showTreeHard(testTree);
+      // tester.stateOfTree(testTree);
+      // System.out.print("Tree by PrintObject: ");
+      // testTree.traverse(printObject);
+      // System.out.println();
+      // testTree.showTreeHard(testTree);
+
+      testTree.collectGarbage();
+      System.out.println("\nafter garbage collection: ");
+      tester.stateOfTree(testTree);
+      testTree.traverse(printObject);
+      System.out.println();
+      testTree.showTreeHard(testTree);
+
+      testTree.remove(70);
+
+      System.out.println("\nafter soft remove 70 (mRoot): ");
+      tester.stateOfTree(testTree);
+      testTree.traverse(printObject);
+      System.out.println();
+      testTree.showTreeHard(testTree);
 
       testTree.collectGarbage();
       System.out.println("\nafter garbage collection: ");

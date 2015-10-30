@@ -142,9 +142,8 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    {
       int oldSize = mSize;
       LazySTNode<E> temp = removeHard(mRoot, x);
-      System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX");
-      printNode(temp);
-      if (temp.equals(mRoot)) mRoot = temp;
+      if (temp.equals(mRoot))
+         mRoot = temp;
       return (mSize != oldSize);
    }
 
@@ -227,10 +226,11 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       // on a stack - unwinding down the tree.
       putativeRtChild_Max = findMax(root.rtChild);
 
-      // when it hits the bottom it the last nodes left child will be null
-      // so it falls through this filter. Otherwise it is returned to the
-      // findMax call immediately above. When this is done winding back up
-      // the max falls through the the last return root statement.
+      // when it hits (unwinds to) the bottom, the last node's left child will 
+      // be null so it falls through this filter. Otherwise it is returned to the
+      // findMax call immediately above. When a null it hit - the base case -
+      // it starts returning the results off the stack sequentially, winding
+      // back up.
       if (putativeRtChild_Max != null)
       {
          return putativeRtChild_Max;
@@ -241,7 +241,8 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       if (root.deleted)
       {
          // need to check the lftChild since the right node could be extant
-         // but "deleted" and if it were hard deleted it would not be here
+         // but soft deleted. Normally this step would not be performed
+         // because in non-lazy deletion the right node would be null
          return findMax(root.lftChild);
       } else
       {
@@ -300,34 +301,28 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    protected LazySTNode<E> collectGarbage(LazySTNode<E> mRoot)
    {
+      if (mRoot == null)
+         return null;
 
-      if (mRoot.rtChild != null)
-      {
-         collectGarbage(mRoot.rtChild);
-      }
+      // look for nodes marked deleted in each child sub-tree and lastly
+      // the root of the whole tree. Return the mRoot because it could 
+      // have been changed.
       if (mRoot.lftChild != null)
-      {
          collectGarbage(mRoot.lftChild);
-      }
+      if (mRoot.rtChild != null)
+         collectGarbage(mRoot.rtChild);
+
       if (mRoot.deleted)
-      {
-        mRoot =  removeHard(mRoot, mRoot.data);
-
-      }
+         mRoot = removeHard(mRoot, mRoot.data);
+      
       return mRoot;
-      // System.out.println(mRoot.data);
-
-      // removeHard(mRoot);
-      // removeHard(mRoot.lftChild);
-      // removeHard(mRoot.rtChild);
-
    }
 
    protected LazySTNode<E> removeHard(LazySTNode<E> root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
       LazySTNode<E> putativeRightChild_min;
-         
+
       if (root == null)
          return null;
 
@@ -337,28 +332,44 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       else if (compareResult > 0)
          root.rtChild = removeHard(root.rtChild, x);
 
-      // found the node
+      // The program recurses above here until it matches the data
+      // Now check to see if it has both children
       else if (root.lftChild != null && root.rtChild != null)
       {
-         
+         // if the node has not been previously marked as deleted
+         // we need to adjust mSize as it is removed here
+         if (!root.deleted)
+            mSize--;
+
+         // find the smallest node in the right subtree to replace the
+         // root node with
          putativeRightChild_min = findMinHard(root.rtChild);
-         
+
+         // replace the data and deleted values with the min node values
          root.data = putativeRightChild_min.data;
          root.deleted = putativeRightChild_min.deleted;
-         LazySTNode<E> temp = remove(root.rtChild, root.data);
-         if (!temp.deleted) mSize--;
-         mSizeHard--;
-       
-       //  putativeRightChild_min.deleted = true;
-       //  root.deleted = findMinHard(root.rtChild).deleted;
-      //   root.rtChild = this.removeHard(root, root.data);
+
+         // mark the min node as deleted
+         putativeRightChild_min.deleted = true;
+
+         // go through and hard remove it
+         root.rtChild = removeHard(root.rtChild, root.data);
+
       } else
+      // if there is only one child node
       {
-       if (!root.deleted) mSize--;
+         // if the node has not been previously marked as deleted
+         // we need to adjust mSize as it is removed here
+         if (!root.deleted)
+            mSize--;
+
+         // replace the deleted node with the next lower one on the tree
          root = (root.lftChild != null) ? root.lftChild : root.rtChild;
-        mSizeHard--;
+
+         // adjust the Hard count
+         mSizeHard--;
       }
-    
+
       return root;
    }
 
@@ -429,20 +440,20 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       {
          System.out.println("this node is null.");
       }
-
    }
-   public void showTreeHard (LazySearchTree tree)
-   {  System.out.println("-----------------------------");
+
+   public void showTreeHard(LazySearchTree<E> tree)
+   {
+      System.out.println("-----------------------------");
       System.out.println("The showTreeHard method. ");
-      System.out.println("The mRoot is: " + tree.mRoot.data );
-  
+      System.out.println("The mRoot is: " + tree.mRoot.data);
       showTreeHard(this.mRoot);
       System.out.print(" " + mRoot.data);
       System.out.println("\n-----------------------------");
    }
 
    protected void showTreeHard(LazySTNode<E> root)
-   { 
+   {
       if (root.lftChild != null)
       {
          showTreeHard(root.lftChild);
@@ -453,9 +464,6 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          showTreeHard(root.rtChild);
          System.out.print(root.rtChild.data + " ");
       }
-//      if (root != null)
-//      System.out.println(root.data);
-     
    }
 
    class DeleteObject<E> implements Traverser<E>
