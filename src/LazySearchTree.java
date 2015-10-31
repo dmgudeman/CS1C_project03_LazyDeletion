@@ -13,7 +13,8 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       public boolean deleted;
       private Integer itemCount;
 
-      public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del, Integer itmCnt)
+      public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del,
+            Integer itmCnt)
       {
          lftChild = lft;
          rtChild = rt;
@@ -35,29 +36,28 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          return 0;
       }
 
-      boolean setHeight(int height)
+      public boolean setHeight(int height)
       {
          return true;
       }
+
       public Integer getItemCount()
       {
          return itemCount;
       }
+
       public void setItemCount(Integer itmCnt)
       {
          itemCount = itmCnt;
       }
-     
 
    }
 
-  
    protected static boolean DEBUG = false;
    protected int mSize;
    protected LazySTNode<E> mRoot;
    protected int mSizeHard;
 
-   
    public LazySearchTree()
    {
       clear();
@@ -135,6 +135,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
       return resultNode.data;
    }
+
    public E findHard(E x)
    {
       LazySTNode<E> resultNode;
@@ -149,11 +150,11 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    {
       return find(mRoot, x) != null;
    }
+
    public boolean containsHard(E x)
    {
       return findHard(mRoot, x) != null;
    }
-   
 
    public boolean insert(E x)
    {
@@ -306,14 +307,19 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       {
          mSize++;
          mSizeHard++;
-         return new LazySTNode<E>(x, null, null, false, 0);
+         return new LazySTNode<E>(x, null, null, false, 1);
       }
 
       compareResult = x.compareTo(root.data);
       if (compareResult < 0)
+      {
          root.lftChild = insert(root.lftChild, x);
-      else if (compareResult > 0)
+
+      } else if (compareResult > 0)
+      {
          root.rtChild = insert(root.rtChild, x);
+
+      }
 
       return root;
    }
@@ -433,6 +439,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          return root; // found
       return null;
    }
+
    protected LazySTNode<E> findHard(LazySTNode<E> root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
@@ -442,9 +449,11 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
       compareResult = x.compareTo(root.data);
       if (compareResult < 0)
-         return find(root.lftChild, x);
+         return findHard(root.lftChild, x);
       if (compareResult > 0)
-         return find(root.rtChild, x);
+         return findHard(root.rtChild, x);
+      if (compareResult == 0)
+         return root;
       return null;
    }
 

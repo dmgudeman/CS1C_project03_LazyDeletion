@@ -8,157 +8,210 @@
  * @author Foothill College, [YOUR NAME HERE]
  */
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Define the class PrintObject to implement Traverser
- * Note: You may modify class PrintObject as you see fit.
+ * Define the class PrintObject to implement Traverser Note: You may modify
+ * class PrintObject as you see fit.
  */
 class PrintObject<E> implements Traverser<E>
 {
 
-
    @Override
    public void visit(E x)
    {
-      System.out.print( x + " ");
-      
+      System.out.print(x + " ");
+
    }
 };
 
-
 /**
- * Builds a binary search tree of items in the inventory.
- * Updates the inventory as the log file is read.
+ * Builds a binary search tree of items in the inventory. Updates the inventory
+ * as the log file is read.
+ * 
  * @param <LazySTNode>
  */
 public class SuperMarket
 {
-  
-   
-	public static final boolean SHOW_DETAILS = true;
 
-	/* Define an attribute called "inventory" of type LazySearchTree */
-	LazySearchTree<String> inventory = new LazySearchTree<>();
-	PrintObject<String> printString = new PrintObject<String>();
-	public int getInventorySize()
-	{	return inventory.sizeHard(); }
-	
-	String itemName = "";
-	public void addToInventory(String itemName)
-	{ 
-	   if(inventory.contains(itemName))
-	   {
-	      Integer temp = inventory.find(inventory.mRoot, itemName).getItemCount();
-         inventory.find(inventory.mRoot, itemName).setItemCount(temp+1);
-	    
-	    
-	   } else
-	   {
-	      inventory.insert(itemName);
-	      System.out.println("INSERTING" + itemName);
-	      Integer temp = inventory.find(inventory.mRoot, itemName).getItemCount();
-	      inventory.find(inventory.mRoot, itemName).setItemCount(temp+1);
-	   }
-	}
-	
-	public void printInventory(String str)
-	{
-	     System.out.println(str);
-	}
-	
-	public void removeFromInventory(String itemName)
-	{
-	  
-	   if(inventory.containsHard(itemName))
+   public static final boolean SHOW_DETAILS = true;
+
+   /* Define an attribute called "inventory" of type LazySearchTree */
+   LazySearchTree<String> inventory = new LazySearchTree<>();
+   LazySearchTree<String>.LazySTNode<String> temp;
+   PrintObject<String> printString = new PrintObject<String>();
+
+   public int getInventorySize()
+   {
+      return inventory.size();
+   }
+
+   String itemName = "";
+
+   public <E> void addToInventory(String itemName)
+   {
+
+      if (inventory.containsHard(itemName))
       {
-	      Integer temp = inventory.findHard(inventory.mRoot, itemName).getItemCount();
-	      if (temp <=1)
-	        inventory.removeHard(itemName);
-	      else 
-	         inventory.findHard(inventory.mRoot, itemName).setItemCount(temp-1);
-	      
+         temp = inventory.findHard(inventory.mRoot, itemName);
+         if (temp.deleted)
+         {
+            temp.deleted = false;
+            temp.setItemCount(1);
+
+         }
+         temp.setItemCount(temp.getItemCount() + 1);
+
+      } else
+      {
+
+         inventory.insert(itemName);
+         inventory.findHard(inventory.mRoot, itemName).setItemCount(1);
+
       }
-	}
-	public static void main(String[] args) 
-	{
-		final String FILENAME = "resources/inventory_log.txt";	// Directory path for Mac OS X
-		//final String FILENAME = "resources\\registers.txt";	// Directory path for Windows OS (i.e. Operating System)
+   }
 
-		SuperMarket market = new SuperMarket();
-		 PrintObject<String> printString = new PrintObject<String>();
+   public void printInventory(String str)
+   {
+      System.out.println("\n" + str);
+      if (inventory.mRoot != null)
+      {
+         if (!inventory.mRoot.deleted)
+            System.out.print(inventory.mRoot.data + ": "
+                  + inventory.mRoot.getItemCount());
+         printInventory(inventory.mRoot);
+      } else
+      {
+         System.out.println("The inventory is empty");
+      }
+   }
 
-		File infile = new File(FILENAME);
+   private void printInventory(LazySearchTree<String>.LazySTNode<String> root)
+   {
+      if (root.lftChild != null)
+      {
+         if (root.lftChild.getItemCount() > 0)
+            System.out.print(root.lftChild.data + ":"
+                  + root.lftChild.getItemCount() + " ");
+         printInventory(root.lftChild);
 
-		try 
-		{
-			Scanner input = new Scanner(infile);
+      }
+      if (root.rtChild != null)
+      {
+         if (root.rtChild.getItemCount() > 0)
+            System.out.print(root.rtChild.data + ":"
+                  + root.rtChild.getItemCount() + " ");
+         printInventory(root.rtChild);
 
-			String line = "";
-			int lineNum = 0;			
-			while (input.hasNextLine()) 
-			{
-				lineNum++;
-				line = input.nextLine(); 
-				String [] tokens = line.split(" ");
+      }
+   }
 
-				String selection = tokens[0];
-				String itemName = tokens[1];
+   public void removeFromInventory(String itemName)
+   {
 
-				// When an item is added:
-				// If the item is not in our inventory, 
-				// create a new entry in our inventory.
-				// Otherwise, increment the count of the item.
-				if (selection.equals("add"))
-				{
-					market.addToInventory(itemName);
-					if (SHOW_DETAILS)
-					   market.inventory.traverse(printString);
-						market.printInventory("At line #" + lineNum + ": " + line);
-				}
-				
-				// When an item is bought: 
-				// Decrement the count of the item.
-				// If the item is out of stock, 
-				// remove the item from inventory.
-				//
-				// Note: buying an out of stock item, is invalid. Handle it appropriately.
-				else if (selection.equals("buy"))
-				{
-					try
-					{
-						market.removeFromInventory(itemName);
-						if (SHOW_DETAILS)
-							market.printInventory("At line #" + lineNum + ": " + line);
-					}
-					catch (java.util.NoSuchElementException ex)
-					{
-						// Note: Ideally we'd print to the error stream,
-						// but to allow correct interleaving of the output
-						// we'll use the regular output stream.
-						System.out.printf("Warning: Item %s is out of stock.\n", itemName);
-					}
-				}
-				else
-				{
-					System.out.println("Warning: Inventory selection not recognized!");
-				}		
+      if (inventory.containsHard(itemName))
+      {
+         temp = inventory.findHard(inventory.mRoot, itemName);
+         if (temp.deleted)
+         {
+            System.out.println("I'm sorry we are out of " + itemName);
+            temp.setItemCount(0);
 
-			}
-			input.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		} 
+         }
+         temp.setItemCount(temp.getItemCount() - 1);
+         if (temp.getItemCount() <= 0)
+         {
+            temp.setItemCount(0);
+            temp.deleted = true;
+         }
 
-		// Display the inventory
-		int totalInventorySize = market.getInventorySize();
-		System.out.println("Number of different items in stock : " + totalInventorySize);
-		market.printInventory("\nItems in stock:");
-	}
+      } else
+      {
+
+         System.out.println("We do not have " + itemName + " in stock.");
+      }
+   }
+
+   public static void main(String[] args)
+   {
+      final String FILENAME = "resources/inventory_log.txt"; // Directory path
+                                                             // for Mac OS X
+      // final String FILENAME = "resources\\registers.txt"; // Directory path
+      // for Windows OS (i.e. Operating System)
+
+      SuperMarket market = new SuperMarket();
+      PrintObject<String> printString = new PrintObject<String>();
+
+      File infile = new File(FILENAME);
+
+      try
+      {
+         Scanner input = new Scanner(infile);
+
+         String line = "";
+         int lineNum = 0;
+         while (input.hasNextLine())
+         {
+            lineNum++;
+            line = input.nextLine();
+            String[] tokens = line.split(" ");
+
+            String selection = tokens[0];
+            String itemName = tokens[1];
+
+            // When an item is added:
+            // If the item is not in our inventory,
+            // create a new entry in our inventory.
+            // Otherwise, increment the count of the item.
+            if (selection.equals("add"))
+            {
+               market.addToInventory(itemName);
+               if (SHOW_DETAILS)
+                  market.printInventory("At line #" + lineNum + ": " + line);
+            }
+
+            // When an item is bought:
+            // Decrement the count of the item.
+            // If the item is out of stock,
+            // remove the item from inventory.
+            //
+            // Note: buying an out of stock item, is invalid. Handle it
+            // appropriately.
+            else if (selection.equals("buy"))
+            {
+               try
+               {
+                  market.removeFromInventory(itemName);
+                  if (SHOW_DETAILS)
+                     market.printInventory("At line #" + lineNum + ": " + line);
+               } catch (java.util.NoSuchElementException ex)
+               {
+                  // Note: Ideally we'd print to the error stream,
+                  // but to allow correct interleaving of the output
+                  // we'll use the regular output stream.
+                  System.out.printf("Warning: Item %s is out of stock.\n",
+                        itemName);
+               }
+            } else
+            {
+               System.out
+                     .println("Warning: Inventory selection not recognized!");
+            }
+
+         }
+         input.close();
+      } catch (FileNotFoundException e)
+      {
+         e.printStackTrace();
+      }
+
+      // Display the inventory
+      int totalInventorySize = market.getInventorySize();
+      System.out.println("Number of different items in stock: "
+            + totalInventorySize);
+      market.printInventory("\nItems in stock:");
+   }
 
 }
