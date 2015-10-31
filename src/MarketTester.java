@@ -20,7 +20,7 @@ public class MarketTester
        System.out.println(sm.inventory.mSize);
        System.out.println(sm.inventory.find(sm.inventory.mRoot, "abacus").getItemCount());
        System.out.println(sm.inventory.find(sm.inventory.mRoot, "banana").getItemCount());
-       sm.printInventory();
+  
    }
 
 }

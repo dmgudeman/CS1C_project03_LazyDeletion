@@ -59,26 +59,27 @@ public class SuperMarket
 	   } else
 	   {
 	      inventory.insert(itemName);
+	      System.out.println("INSERTING" + itemName);
 	      Integer temp = inventory.find(inventory.mRoot, itemName).getItemCount();
 	      inventory.find(inventory.mRoot, itemName).setItemCount(temp+1);
 	   }
 	}
 	
-	public void printInventory()
+	public void printInventory(String str)
 	{
-	     inventory.traverse(printString);
+	     System.out.println(str);
 	}
 	
 	public void removeFromInventory(String itemName)
 	{
 	  
-	   if(inventory.contains(itemName))
+	   if(inventory.containsHard(itemName))
       {
-	      Integer temp = inventory.find(inventory.mRoot, itemName).getItemCount();
+	      Integer temp = inventory.findHard(inventory.mRoot, itemName).getItemCount();
 	      if (temp <=1)
-	        inventory.remove(itemName);
+	        inventory.removeHard(itemName);
 	      else 
-	         inventory.find(inventory.mRoot, itemName).setItemCount(temp-1);
+	         inventory.findHard(inventory.mRoot, itemName).setItemCount(temp-1);
 	      
       }
 	}
@@ -88,7 +89,7 @@ public class SuperMarket
 		//final String FILENAME = "resources\\registers.txt";	// Directory path for Windows OS (i.e. Operating System)
 
 		SuperMarket market = new SuperMarket();
-       
+		 PrintObject<String> printString = new PrintObject<String>();
 
 		File infile = new File(FILENAME);
 
@@ -115,6 +116,7 @@ public class SuperMarket
 				{
 					market.addToInventory(itemName);
 					if (SHOW_DETAILS)
+					   market.inventory.traverse(printString);
 						market.printInventory("At line #" + lineNum + ": " + line);
 				}
 				

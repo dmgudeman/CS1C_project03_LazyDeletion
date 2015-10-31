@@ -135,11 +135,25 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
       return resultNode.data;
    }
+   public E findHard(E x)
+   {
+      LazySTNode<E> resultNode;
+      resultNode = findHard(mRoot, x);
+      if (resultNode == null)
+         throw new NoSuchElementException();
+
+      return resultNode.data;
+   }
 
    public boolean contains(E x)
    {
       return find(mRoot, x) != null;
    }
+   public boolean containsHard(E x)
+   {
+      return findHard(mRoot, x) != null;
+   }
+   
 
    public boolean insert(E x)
    {
@@ -417,6 +431,20 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          return find(root.rtChild, x);
       if (!root.deleted)
          return root; // found
+      return null;
+   }
+   protected LazySTNode<E> findHard(LazySTNode<E> root, E x)
+   {
+      int compareResult; // avoid multiple calls to compareTo()
+
+      if (root == null)
+         return null;
+
+      compareResult = x.compareTo(root.data);
+      if (compareResult < 0)
+         return find(root.lftChild, x);
+      if (compareResult > 0)
+         return find(root.rtChild, x);
       return null;
    }
 
