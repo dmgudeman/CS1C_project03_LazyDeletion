@@ -4,20 +4,29 @@
 
 public class LazySearchTreeTester<E extends Comparable<? super E>>
 {
-  
+   LazySearchTree<E> tree = new LazySearchTree<E>();
+   
+   
 
-   public void stateOfTree(LazySearchTree<E> tree)
+   
+   
+   
+    public LazySearchTreeTester(LazySearchTree<E> testTree)
    {
-      System.out.println("\n=======================================");
-      this.showMin(tree);
-      this.showMax(tree);    
-      this.showSizes(tree);
-
-      System.out.println("=======================================\n");   
+      super();
+      this.tree = testTree;
    }
-   
-   
-   public void showMin(LazySearchTree<E> tree)
+
+    public void stateOfTree()
+    {
+       System.out.println("\n=======================================");
+       this.showMin();
+       this.showMax();    
+       this.showSizes();
+
+       System.out.println("=======================================\n");   
+    }
+ void showMin()
    {
       try
       {
@@ -38,7 +47,7 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
    }
    
    
-   public void showMax(LazySearchTree<E> tree)
+   public void showMax()
    {
       try
       {
@@ -57,7 +66,7 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
          System.out.println("The findMaxHard is null");
       }
    }
-   public void showSizes(LazySearchTree<E> tree)
+   public void showSizes()
    {
       System.out.println("The mSize is: " + tree.mSize);
       System.out.println("The mSizeHard is: " + tree.mSizeHard);

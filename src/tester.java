@@ -3,8 +3,9 @@ public class tester
    public static void main(String[] args)
    {
       int k;
-      LazySearchTreeTester tester = new LazySearchTreeTester();
+    
       LazySearchTree<Integer> testTree = new LazySearchTree<Integer>();
+      LazySearchTreeTester tester = new LazySearchTreeTester(testTree);
       PrintObject<Integer> printObject = new PrintObject<Integer>();
 
       // testTree.traverse(printObject);
@@ -26,7 +27,7 @@ public class tester
       // tester.stateOfTree(testTree);
       // System.out.println("find function should equal 60:   " +
       // testTree.find(60));
-      tester.stateOfTree(testTree);
+      tester.stateOfTree();
       testTree.traverse(printObject);
 
       System.out.println();
@@ -37,7 +38,7 @@ public class tester
 
       // testTree.remove(70);
       // testTree.remove(80);
-      tester.stateOfTree(testTree);
+      tester.stateOfTree();
       System.out.print("Tree by PrintObject: ");
       testTree.traverse(printObject);
       System.out.println();
@@ -55,7 +56,7 @@ public class tester
 
       testTree.collectGarbage();
       System.out.println("\nafter garbage collection: ");
-      tester.stateOfTree(testTree);
+      tester.stateOfTree();
       testTree.traverse(printObject);
       System.out.println();
       testTree.showTreeHard(testTree);
@@ -63,14 +64,14 @@ public class tester
       testTree.remove(70);
 
       System.out.println("\nafter soft remove 70 (mRoot): ");
-      tester.stateOfTree(testTree);
+      tester.stateOfTree();
       testTree.traverse(printObject);
       System.out.println();
       testTree.showTreeHard(testTree);
 
       testTree.collectGarbage();
       System.out.println("\nafter garbage collection: ");
-      tester.stateOfTree(testTree);
+      tester.stateOfTree();
       testTree.traverse(printObject);
       System.out.println();
       testTree.showTreeHard(testTree);
@@ -80,14 +81,14 @@ public class tester
      testTree.remove(74);
      
      System.out.println("\nafter soft remove all nodes: ");
-     tester.stateOfTree(testTree);
+     tester.stateOfTree();
      testTree.traverse(printObject);
      System.out.println();
      testTree.showTreeHard(testTree);
      
      testTree.collectGarbage();
      System.out.println("\nafter garbage collection: ");
-     tester.stateOfTree(testTree);
+     tester.stateOfTree();
      testTree.traverse(printObject);
      System.out.println();
      testTree.showTreeHard(testTree);

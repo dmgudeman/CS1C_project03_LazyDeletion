@@ -21,13 +21,11 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          data = d;
          deleted = del;
          itemCount = itmCnt;
-
       }
 
       public LazySTNode()
       {
          this(null, null, null, false, 0);
-
       }
 
       // function stubs -- for use only with AVL Trees when we extend
@@ -318,9 +316,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       } else if (compareResult > 0)
       {
          root.rtChild = insert(root.rtChild, x);
-
       }
-
       return root;
    }
 
