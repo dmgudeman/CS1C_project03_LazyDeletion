@@ -19,10 +19,13 @@ import java.util.Scanner;
  */
 class PrintObject<E> implements Traverser<E>
 {
-   
+
+
+   @Override
    public void visit(E x)
    {
       System.out.print( x + " ");
+      
    }
 };
 
@@ -30,26 +33,62 @@ class PrintObject<E> implements Traverser<E>
 /**
  * Builds a binary search tree of items in the inventory.
  * Updates the inventory as the log file is read.
+ * @param <LazySTNode>
  */
-public class SuperMarket 
+public class SuperMarket
 {
   
+   
 	public static final boolean SHOW_DETAILS = true;
 
 	/* Define an attribute called "inventory" of type LazySearchTree */
-	LazySearchTree<LazySTNode> inventory = new LazySearchTree<>();
-
+	LazySearchTree<String> inventory = new LazySearchTree<>();
+	PrintObject<String> printString = new PrintObject<String>();
 	public int getInventorySize()
 	{	return inventory.sizeHard(); }
 	
+	String itemName = "";
+	public void addToInventory(String itemName)
+	{ 
+	   if(inventory.contains(itemName))
+	   {
+	      Integer temp = inventory.find(inventory.mRoot, itemName).getItemCount();
+         inventory.find(inventory.mRoot, itemName).setItemCount(temp+1);
+	    
+	    
+	   } else
+	   {
+	      inventory.insert(itemName);
+	      Integer temp = inventory.find(inventory.mRoot, itemName).getItemCount();
+	      inventory.find(inventory.mRoot, itemName).setItemCount(temp+1);
+	   }
+	}
 	
+	public void printInventory()
+	{
+	     inventory.traverse(printString);
+	}
+	
+	public void removeFromInventory(String itemName)
+	{
+	  
+	   if(inventory.contains(itemName))
+      {
+	      Integer temp = inventory.find(inventory.mRoot, itemName).getItemCount();
+	      if (temp <=1)
+	        inventory.remove(itemName);
+	      else 
+	         inventory.find(inventory.mRoot, itemName).setItemCount(temp-1);
+	      
+      }
+	}
 	public static void main(String[] args) 
 	{
 		final String FILENAME = "resources/inventory_log.txt";	// Directory path for Mac OS X
 		//final String FILENAME = "resources\\registers.txt";	// Directory path for Windows OS (i.e. Operating System)
 
 		SuperMarket market = new SuperMarket();
-
+       
 
 		File infile = new File(FILENAME);
 
