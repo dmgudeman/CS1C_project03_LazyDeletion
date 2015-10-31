@@ -77,30 +77,38 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public E findMin()
    {
-      if (mRoot == null)
+      LazySTNode<E> resultNode;
+      resultNode = findMin(mRoot);
+      if (resultNode == null)
          throw new NoSuchElementException();
-      return findMin(mRoot).data;
+      return resultNode.data;
    }
 
    public E findMinHard()
    {
-      if (mRoot == null)
+      LazySTNode<E> resultNode;
+      resultNode = findMinHard(mRoot);
+      if (resultNode == null)
          throw new NoSuchElementException();
-      return findMinHard(mRoot).data;
+      return resultNode.data;
    }
 
    public E findMax()
    {
-      if (mRoot == null)
+      LazySTNode<E> resultNode;
+      resultNode = findMax(mRoot);
+      if (resultNode == null)
          throw new NoSuchElementException();
-      return findMax(mRoot).data;
+      return resultNode.data;
    }
 
    public E findMaxHard()
    {
-      if (mRoot == null)
+      LazySTNode<E> resultNode;
+      resultNode = findMaxHard(mRoot);
+      if (resultNode == null)
          throw new NoSuchElementException();
-      return findMaxHard(mRoot).data;
+      return resultNode.data;
    }
 
    public E find(E x)
@@ -132,10 +140,10 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return (mSize != oldSize);
    }
 
-   public boolean collectGarbage()
+   public void collectGarbage()
    {
-      this.collectGarbage(mRoot);
-      return true;
+      mRoot = collectGarbage(mRoot);
+
    }
 
    public boolean removeHard(E x)
@@ -203,14 +211,10 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    {
       if (root == null)
          return null;
-
-      if (root.lftChild != null)
-      {
-         return findMinHard(root.lftChild);
-      } else
-      {
+      if (root.lftChild == null)
          return root;
-      }
+      return findMinHard(root.lftChild);
+
    }
 
    protected LazySTNode<E> findMax(LazySTNode<E> root)
@@ -226,8 +230,9 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       // on a stack - unwinding down the tree.
       putativeRtChild_Max = findMax(root.rtChild);
 
-      // when it hits (unwinds to) the bottom, the last node's left child will 
-      // be null so it falls through this filter. Otherwise it is returned to the
+      // when it hits (unwinds to) the bottom, the last node's left child will
+      // be null so it falls through this filter. Otherwise it is returned to
+      // the
       // findMax call immediately above. When a null it hit - the base case -
       // it starts returning the results off the stack sequentially, winding
       // back up.
@@ -299,23 +304,21 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
-   protected LazySTNode<E> collectGarbage(LazySTNode<E> mRoot)
+   protected LazySTNode<E> collectGarbage(LazySTNode<E> root)
    {
-      if (mRoot == null)
+      if (root == null)
          return null;
 
       // look for nodes marked deleted in each child sub-tree and lastly
-      // the root of the whole tree. Return the mRoot because it could 
+      // the root of the whole tree. Return the mRoot because it could
       // have been changed.
-      if (mRoot.lftChild != null)
-         collectGarbage(mRoot.lftChild);
-      if (mRoot.rtChild != null)
-         collectGarbage(mRoot.rtChild);
-
-      if (mRoot.deleted)
-         mRoot = removeHard(mRoot, mRoot.data);
-      
-      return mRoot;
+      if(root.lftChild != null)
+         root.lftChild = collectGarbage(root.lftChild);
+      if(root.rtChild != null)
+         root.rtChild = collectGarbage(root.rtChild);
+      if (root.deleted)
+         root = removeHard(root, root.data);
+      return root;
    }
 
    protected LazySTNode<E> removeHard(LazySTNode<E> root, E x)
@@ -446,9 +449,15 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    {
       System.out.println("-----------------------------");
       System.out.println("The showTreeHard method. ");
-      System.out.println("The mRoot is: " + tree.mRoot.data);
-      showTreeHard(this.mRoot);
-      System.out.print(" " + mRoot.data);
+      if (tree.mRoot != null)
+      {
+         System.out.println("The mRoot is: " + tree.mRoot.data);
+         showTreeHard(this.mRoot);
+         System.out.print(" " + mRoot.data);
+      } else
+      {
+         System.out.println("The tree is empty");
+      }
       System.out.println("\n-----------------------------");
    }
 
@@ -466,13 +475,13 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
-   class DeleteObject<E> implements Traverser<E>
-   {
-      public void visit(E x)
-      {
-
-      }
-
-   }
+//   class DeleteObject implements Traverser<E>
+//   {
+//      public void visit(E x)
+//      {
+//
+//      }
+//
+//   }
 
 }
