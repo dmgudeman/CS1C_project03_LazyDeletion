@@ -4,15 +4,15 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       Cloneable
 {
 
-   protected class LazySTNode<E extends Comparable<? super E>>
+   protected class LazySTNode
    {
       // use public access so the tree or other classes can access members
-      public LazySTNode<E> lftChild, rtChild;
+      public LazySTNode lftChild, rtChild;
       public E data;
-      public LazySTNode<E> myRoot; // needed to test for certain error
+      public LazySTNode myRoot; // needed to test for certain error
       public boolean deleted;
 
-      public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del)
+      public LazySTNode(E d, LazySTNode lft, LazySTNode rt, boolean del)
       {
          lftChild = lft;
          rtChild = rt;
@@ -40,7 +40,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    protected static boolean DEBUG = false;
    protected int mSize;
-   protected LazySTNode<E> mRoot;
+   protected LazySTNode mRoot;
    protected int mSizeHard;
 
    public LazySearchTree()
@@ -77,7 +77,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public E findMin()
    {
-      LazySTNode<E> resultNode;
+      LazySTNode resultNode;
       resultNode = findMin(mRoot);
       if (resultNode == null)
          throw new NoSuchElementException();
@@ -86,7 +86,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public E findMinHard()
    {
-      LazySTNode<E> resultNode;
+      LazySTNode resultNode;
       resultNode = findMinHard(mRoot);
       if (resultNode == null)
          throw new NoSuchElementException();
@@ -95,7 +95,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public E findMax()
    {
-      LazySTNode<E> resultNode;
+      LazySTNode resultNode;
       resultNode = findMax(mRoot);
       if (resultNode == null)
          throw new NoSuchElementException();
@@ -104,7 +104,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public E findMaxHard()
    {
-      LazySTNode<E> resultNode;
+      LazySTNode resultNode;
       resultNode = findMaxHard(mRoot);
       if (resultNode == null)
          throw new NoSuchElementException();
@@ -113,7 +113,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public E find(E x)
    {
-      LazySTNode<E> resultNode;
+      LazySTNode resultNode;
       resultNode = find(mRoot, x);
       if (resultNode == null)
          throw new NoSuchElementException();
@@ -149,7 +149,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    public boolean removeHard(E x)
    {
       int oldSize = mSize;
-      LazySTNode<E> temp = removeHard(mRoot, x);
+      LazySTNode temp = removeHard(mRoot, x);
       if (temp.equals(mRoot))
          mRoot = temp;
       return (mSize != oldSize);
@@ -172,10 +172,10 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    }
 
    // private helper methods ----------------------------------------
-   protected LazySTNode<E> findMin(LazySTNode<E> root)
+   protected LazySTNode findMin(LazySTNode root)
    {
       // sorry for the lengthy name but helps me conceptualize this process.
-      LazySTNode<E> putativeLeftChild_Min;
+      LazySTNode putativeLeftChild_Min;
 
       if (root == null)
          return null;
@@ -207,7 +207,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
-   protected LazySTNode<E> findMinHard(LazySTNode<E> root)
+   protected LazySTNode findMinHard(LazySTNode root)
    {
       if (root == null)
          return null;
@@ -217,10 +217,10 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    }
 
-   protected LazySTNode<E> findMax(LazySTNode<E> root)
+   protected LazySTNode findMax(LazySTNode root)
    {
       // sorry for the lengthy name but helps me conceptualize this process.
-      LazySTNode<E> putativeRtChild_Max;
+      LazySTNode putativeRtChild_Max;
 
       if (root == null)
          return null;
@@ -255,7 +255,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
-   protected LazySTNode<E> findMaxHard(LazySTNode<E> root)
+   protected LazySTNode findMaxHard(LazySTNode root)
    {
       if (root == null)
          return null;
@@ -269,7 +269,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
-   protected LazySTNode<E> insert(LazySTNode<E> root, E x)
+   protected LazySTNode insert(LazySTNode root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
 
@@ -277,7 +277,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       {
          mSize++;
          mSizeHard++;
-         return new LazySTNode<E>(x, null, null, false);
+         return new LazySTNode(x, null, null, false);
       }
 
       compareResult = x.compareTo(root.data);
@@ -289,7 +289,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return root;
    }
 
-   protected LazySTNode<E> remove(LazySTNode<E> root, E x)
+   protected LazySTNode remove(LazySTNode root, E x)
    {
       if (root == null)
          return null;
@@ -304,7 +304,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
-   protected LazySTNode<E> collectGarbage(LazySTNode<E> root)
+   protected LazySTNode collectGarbage(LazySTNode root)
    {
       if (root == null)
          return null;
@@ -321,10 +321,10 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return root;
    }
 
-   protected LazySTNode<E> removeHard(LazySTNode<E> root, E x)
+   protected LazySTNode removeHard(LazySTNode root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
-      LazySTNode<E> putativeRightChild_min;
+      LazySTNode putativeRightChild_min;
 
       if (root == null)
          return null;
@@ -377,7 +377,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    }
 
    protected <F extends Traverser<? super E>> void traverse(F func,
-         LazySTNode<E> treeNode)
+         LazySTNode treeNode)
    {
       if (treeNode == null)
          return;
@@ -388,7 +388,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       traverse(func, treeNode.rtChild);
    }
 
-   protected LazySTNode<E> find(LazySTNode<E> root, E x)
+   protected LazySTNode find(LazySTNode root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
 
@@ -405,19 +405,19 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return null;
    }
 
-   protected LazySTNode<E> cloneSubtree(LazySTNode<E> root)
+   protected LazySTNode cloneSubtree(LazySTNode root)
    {
-      LazySTNode<E> newNode;
+      LazySTNode newNode;
       if (root == null)
          return null;
 
       // does not set myRoot which must be done by caller
-      newNode = new LazySTNode<E>(root.data, cloneSubtree(root.lftChild),
+      newNode = new LazySTNode(root.data, cloneSubtree(root.lftChild),
             cloneSubtree(root.rtChild), root.deleted);
       return newNode;
    }
 
-   protected int findHeight(LazySTNode<E> treeNode, int height)
+   protected int findHeight(LazySTNode treeNode, int height)
    {
       int leftHeight, rightHeight;
       if (treeNode == null)
@@ -428,7 +428,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return (leftHeight > rightHeight) ? leftHeight : rightHeight;
    }
 
-   protected void printNode(LazySTNode<E> node)
+   protected void printNode(LazySTNode node)
    {
       if (node != null)
       {
@@ -461,7 +461,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       System.out.println("\n-----------------------------");
    }
 
-   protected void showTreeHard(LazySTNode<E> root)
+   protected void showTreeHard(LazySTNode root)
    {
       if (root.lftChild != null)
       {
