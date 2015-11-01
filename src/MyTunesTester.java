@@ -35,10 +35,10 @@ public class MyTunesTester<E extends Comparable<? super E>>
          System.out.println(personalTunes.getStore().tunes2.find(personalTunes.getStore().tunes2.mRoot, stringy).getSongEntry().getArtistName());
          SongEntry songEntry = personalTunes.getStore().tunes2.find(personalTunes.getStore().tunes2.mRoot, stringy).getSongEntry();
      
-tempTree.insert(tempTree.mRoot,  stringy,  songEntry );
+tempTree.insert(stringy,  songEntry );
 System.out.println();
 //tempTree.find(tempTree.mRoot, stringy).setSongEntry(songEntry);
-System.out.println(tempTree.find(tempTree.mRoot, "Screams"));
+System.out.println(tempTree.find(tempTree.mRoot, "Screams").getSongEntry().getGenre());
 tempTreeTester.stateOfTree();
        
 System.out.println(tempTree.mSize);

@@ -49,7 +49,7 @@ public class SuperMarket
    static LazySearchTreeTester<String> tester = new LazySearchTreeTester<>(
          inventory);
    // toggles a print method that shows the state of the inventory for debugging
-   static boolean testerOn = false;
+   static boolean testerOn = true;
 
    public int getInventorySize()
    {
@@ -151,7 +151,7 @@ public class SuperMarket
 
       SuperMarket market = new SuperMarket();
       PrintObject<String> printString = new PrintObject<String>();
-
+     
       File infile = new File(FILENAME);
 
       try
@@ -169,7 +169,7 @@ public class SuperMarket
 
             String selection = tokens[0];
             String itemName = tokens[1];
-
+            tester.stateOfTree();
             // When an item is added:
             // If the item is not in our inventory,
             // create a new entry in our inventory.

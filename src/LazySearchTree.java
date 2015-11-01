@@ -331,7 +331,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          mSizeHard++;
          return new LazySTNode<E>(x, null, null, false, 1, null);
       }
-
+  //    System.out.println(this.mRoot.data + "11111111111111111111111111111111111" + x.compareTo(root.data));
       compareResult = x.compareTo(root.data);
       if (compareResult < 0)
       {
@@ -344,19 +344,18 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       
       return root;
    }
-   protected LazySTNode<E> insert(LazySTNode<E> root, E x, SongEntry se)
+   private LazySTNode<E> insert(LazySTNode<E> root, E x, SongEntry se)
    {
       int compareResult; // avoid multiple calls to compareTo()
 
       if (root == null)       
       {
-         if(mRoot == null)
-            mRoot = root;
+         
          mSize++;
          mSizeHard++;
          return new LazySTNode<E>(x, null, null, false, 1, se);
       }
-
+//System.out.println(this.mRoot.data + "22222222222222222222222222222222222222222" + x.compareTo(root.data));
       compareResult = x.compareTo(root.data);
       if (compareResult < 0)
       {

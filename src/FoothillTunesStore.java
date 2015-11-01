@@ -65,11 +65,11 @@ public class FoothillTunesStore<E extends Comparable<? super E>> implements
             SongEntry currentSong = new SongEntry(title, duration, artist,
                   genre);
 
-//            LazySearchTreeTester<E> tester = new LazySearchTreeTester<E>(
-//                  tunes2, false);
+           LazySearchTreeTester<E> tester = new LazySearchTreeTester<E>(
+                 tunes2, true);
             
             tunes2.addSongEntry(currentSong);
-        //    tester.stateOfTree();
+          //  tester.stateOfTree();
             
             
 
