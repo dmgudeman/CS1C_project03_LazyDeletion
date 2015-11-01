@@ -26,14 +26,15 @@ class PrintObject<E> implements Traverser<E>
 };
 
 /**
- * This class maintains an inventory of products by using a LazySearchTree 
- * of String containing LazySTNodes. In order to keep track of the number of 
- * a specific product that is in the inventory, a itemCount attribute was added
- * to the LazySTNode. Lazy deletion was utilized so if a product was ever ordered
- * it would be kept in inventory. If it as zero, the product (node) is maintained
- * in a deleted state of size zero. The collect garbage function will delete this
- * information. In order to maintain the lazy deletion the soft size of the 
- * inventory (mSize) was adjusted in this class in two places. 
+ * This class maintains an inventory of products by using a LazySearchTree of
+ * String containing LazySTNodes. In order to keep track of the number of a
+ * specific product that is in the inventory, a itemCount attribute was added to
+ * the LazySTNode. Lazy deletion was utilized so if a product was ever ordered
+ * it would be kept in inventory. If it as zero, the product (node) is
+ * maintained in a deleted state of size zero. The collect garbage function will
+ * delete this information. In order to maintain the lazy deletion the soft size
+ * of the inventory (mSize) was adjusted in this class in two places.
+ * 
  * @author davidgudeman
  *
  */
@@ -54,7 +55,6 @@ public class SuperMarket
    {
       return inventory.mSize;
    }
-
    String itemName = "";
 
    public <E> void addToInventory(String itemName)
@@ -69,7 +69,6 @@ public class SuperMarket
             temp.setItemCount(1);
          }
          temp.setItemCount(temp.getItemCount() + 1);
-
       } else
       {
          inventory.insert(itemName);
@@ -100,7 +99,6 @@ public class SuperMarket
             System.out.print(root.lftChild.data + ":"
                   + root.lftChild.getItemCount() + " ");
          printInventory(root.lftChild);
-
       }
       if (root.rtChild != null)
       {
@@ -108,7 +106,6 @@ public class SuperMarket
             System.out.print(root.rtChild.data + ":"
                   + root.rtChild.getItemCount() + " ");
          printInventory(root.rtChild);
-
       }
    }
 
@@ -119,11 +116,10 @@ public class SuperMarket
          temp = inventory.findHard(inventory.mRoot, itemName);
          if (temp.deleted)
          {
-            System.out
-                  .println("\nYou tried to buy: "
-                        + itemName
-                        + " \nWe are out of " + itemName + ". Please contact us to get an "
-                        + "estimate of when we will have it in stock.");
+            System.out.println("\nYou tried to buy: " + itemName
+                  + " \nWe are out of " + itemName
+                  + ". Please contact us to get an "
+                  + "estimate of when we will have it in stock.");
             SHOW_DETAILS = false;
             temp.setItemCount(0);
          } else
@@ -139,11 +135,10 @@ public class SuperMarket
       } else
       {
          SHOW_DETAILS = false;
-         System.out
-               .println("\nYou tried to buy: "
-                     + itemName
-                     + " \nWe have not stocked " + itemName + " yet. Please contact us if "
-                     + "you would like us to stock this product.");
+         System.out.println("\nYou tried to buy: " + itemName
+               + " \nWe have not stocked " + itemName
+               + " yet. Please contact us if "
+               + "you would like us to stock this product.");
       }
    }
 
@@ -204,7 +199,7 @@ public class SuperMarket
                      market.printInventory("At line #" + lineNum + ": " + line);
                   if (testerOn)
                      tester.stateOfTree();
-                  
+
                } catch (java.util.NoSuchElementException ex)
                {
                   // Note: Ideally we'd print to the error stream,
@@ -218,7 +213,6 @@ public class SuperMarket
                System.out
                      .println("Warning: Inventory selection not recognized!");
             }
-
          }
          input.close();
       } catch (FileNotFoundException e)
@@ -231,12 +225,13 @@ public class SuperMarket
       System.out.println("\n\nNumber of different items in stock: "
             + totalInventorySize);
       market.printInventory("Items in stock:");
+ 
       if (testerOn)
+      {
          tester.stateOfTree();
-      inventory.collectGarbage();
-      if (testerOn)
+         inventory.collectGarbage();
          tester.stateOfTree();
-      
+      }
    }
 
 }

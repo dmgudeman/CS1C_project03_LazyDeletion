@@ -5,26 +5,33 @@
 public class LazySearchTreeTester<E extends Comparable<? super E>>
 {
    LazySearchTree<E> tree = new LazySearchTree<E>();
+   public static boolean DEBUG = false;
    
-   
-
-   
-   
-   
-    public LazySearchTreeTester(LazySearchTree<E> testTree)
+    public LazySearchTreeTester(LazySearchTree<E> testTree, boolean dbg)
    {
       super();
       this.tree = testTree;
+      DEBUG = dbg;
    }
+    public LazySearchTreeTester(LazySearchTree<E> testTree)
+    {
+       super();
+       this.tree = testTree;
+       DEBUG = true;
+    }
 
     public void stateOfTree()
     {
+       if(DEBUG)
+       {
        System.out.println("\n=======================================");
        this.showMin();
        this.showMax();    
        this.showSizes();
+       this.showMroot();
 
-       System.out.println("=======================================\n");   
+       System.out.println("=======================================\n");  
+       }
     }
  void showMin()
    {
@@ -68,9 +75,27 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
    }
    public void showSizes()
    {
+      try
+      {
       System.out.println("The mSize is: " + tree.mSize);
       System.out.println("The mSizeHard is: " + tree.mSizeHard);
+      } catch (Exception e)
+      {
+         System.out.println("The tree is null");
+      }
    }
+   public void showMroot()
+   {
+      try
+      {
+      System.out.println("The mRoot is: " + tree.mRoot.data);
+     
+      } catch (Exception e)
+      {
+         System.out.println("The mRoot is null.");
+      }
+   }
+   
    
   
 }

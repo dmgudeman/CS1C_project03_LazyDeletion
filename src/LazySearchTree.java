@@ -1,5 +1,7 @@
 import java.util.NoSuchElementException;
 
+import cs1c.SongEntry;
+
 public class LazySearchTree<E extends Comparable<? super E>> implements
       Cloneable
 {
@@ -12,20 +14,26 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       public LazySTNode<E> myRoot; // needed to test for certain error
       public boolean deleted;
       private Integer itemCount;
+      private SongEntry songEntry;
+      private boolean DEBUG;
 
       public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del,
-            Integer itmCnt)
+            Integer itmCnt, SongEntry sngNtry)
       {
+         
+            
          lftChild = lft;
          rtChild = rt;
          data = d;
          deleted = del;
          itemCount = itmCnt;
+         songEntry = sngNtry;         
+           
       }
 
       public LazySTNode()
       {
-         this(null, null, null, false, 0);
+         this(null, null, null, false, 0, null);
       }
 
       // function stubs -- for use only with AVL Trees when we extend
@@ -47,6 +55,16 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       public void setItemCount(Integer itmCnt)
       {
          itemCount = itmCnt;
+      }
+      public void setSongEntry(SongEntry se)
+      {
+         this.data = (E) songEntry.getTitle();
+         this.songEntry = se;
+      }
+      
+      public SongEntry getSongEntry()
+      {
+         return this.songEntry;
       }
 
    }
@@ -154,10 +172,16 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return findHard(mRoot, x) != null;
    }
 
-   public boolean insert(E x)
+   public boolean insert(E data)
    {
       int oldSize = mSize;
-      mRoot = insert(mRoot, x);
+      mRoot = insert(mRoot, data);
+      return (mSize != oldSize);
+   }
+   public boolean insert(E data, SongEntry se)
+   {
+      int oldSize = mSize;
+      mRoot = insert(mRoot, data, se);
       return (mSize != oldSize);
    }
 
@@ -305,7 +329,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       {
          mSize++;
          mSizeHard++;
-         return new LazySTNode<E>(x, null, null, false, 1);
+         return new LazySTNode<E>(x, null, null, false, 1, null);
       }
 
       compareResult = x.compareTo(root.data);
@@ -316,6 +340,36 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       } else if (compareResult > 0)
       {
          root.rtChild = insert(root.rtChild, x);
+      }
+      
+      return root;
+   }
+   protected LazySTNode<E> insert(LazySTNode<E> root, E x, SongEntry se)
+   {
+      int compareResult; // avoid multiple calls to compareTo()
+
+      if (root == null)       
+      {
+         if(mRoot == null)
+            mRoot = root;
+         mSize++;
+         mSizeHard++;
+         return new LazySTNode<E>(x, null, null, false, 1, se);
+      }
+
+      compareResult = x.compareTo(root.data);
+      if (compareResult < 0)
+      {
+         root.lftChild = insert(root.lftChild, x, se);
+
+      } else if (compareResult > 0)
+      {
+         root.rtChild = insert(root.rtChild, x, se);
+      }
+      if(DEBUG)
+      {
+         System.out.print("Adding " );
+         showNode(root);
       }
       return root;
    }
@@ -419,7 +473,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       traverse(func, treeNode.rtChild);
    }
 
-   protected LazySTNode<E> find(LazySTNode<E> root, E x)
+   public LazySTNode<E> find(LazySTNode<E> root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
 
@@ -442,7 +496,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
       if (root == null)
          return null;
-
+      
       compareResult = x.compareTo(root.data);
       if (compareResult < 0)
          return findHard(root.lftChild, x);
@@ -461,7 +515,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
       // does not set myRoot which must be done by caller
       newNode = new LazySTNode<E>(root.data, cloneSubtree(root.lftChild),
-            cloneSubtree(root.rtChild), root.deleted, root.itemCount);
+            cloneSubtree(root.rtChild), root.deleted, root.itemCount, root.songEntry);
       return newNode;
    }
 
@@ -522,7 +576,52 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          System.out.print(root.rtChild.data + " ");
       }
    }
-
+   public void showNode(String str)
+   {
+      LazySTNode<E> temp = findNodeByString(mRoot, str);
+      showNode(temp);
+      
+   }
+   
+   public LazySTNode<E>  findNodeByString(LazySTNode<E> root, String x)
+   {
+      if(root == null)
+         return null;
+      int compareResult = x.compareTo((String) root.data);
+      if (compareResult < 0)
+         return findNodeByString(root.lftChild, x);
+      if (compareResult > 0)
+         return findNodeByString(root.rtChild, x);
+      if (compareResult == 0)
+         return root;
+      return null;
+      
+   }
+   public void addSongEntry(SongEntry se)
+   {
+      String title  = se.getTitle();
+    
+      insert((E) title, se);   
+   }
+   
+   public void showNode(LazySTNode<E> node)
+   {
+      System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++++");
+      System.out.println("showNode(LazySTNode<E> node) line 615 LazySearchTree");
+      System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+      System.out.println("                   node.data: " + node.data);
+      System.out.println("   node.songEntry.getTitle(): " + node.getSongEntry().getTitle());
+      System.out.println("  node.songEntry.getArtist(): " + node.getSongEntry().getArtistName());
+      System.out.println("node.songEntry.getDuration(): " + node.getSongEntry().getDuration());
+      System.out.println("   node.songEntry.getGenre(): " + node.getSongEntry().getGenre());
+      System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+     
+   }
+   
+   public void setDEBUG(boolean dbg)
+   {
+      this.DEBUG = dbg;
+   }
    // class DeleteObject implements Traverser<E>
    // {
    // public void visit(E x)

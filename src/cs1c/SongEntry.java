@@ -23,12 +23,12 @@ public class SongEntry implements Comparable<SongEntry>
 	private String genre;
 
 	// default constructor
-	protected SongEntry(String title, int duration, String artist_name, String genre)
+	public SongEntry(String title, int duration, String artist_name, String genre)
 	{
 		this.title = title;
 		setDuration(duration);
 		this.artist = artist_name;
-		this.genre = genre;
+		this.genre = genre;	
 	}
 
 	/**
