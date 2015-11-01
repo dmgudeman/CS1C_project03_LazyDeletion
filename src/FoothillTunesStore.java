@@ -146,8 +146,8 @@ public class FoothillTunesStore<E extends Comparable<? super E>> implements
       // findSongByTitle(tunes2.mRoot, title);<<<<<<<<<<<<<<<<<<<<<<<<
    }
 
-   private LazySearchTree<E>.LazySTNode<E> findSongByTitle(
-         LazySearchTree<E>.LazySTNode<E> root, String title)
+   private LazySTNode<E> findSongByTitle(
+         LazySTNode<E> root, String title)
    {
       try
       {

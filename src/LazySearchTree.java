@@ -5,74 +5,75 @@ import cs1c.SongEntry;
 public class LazySearchTree<E extends Comparable<? super E>> implements
       Cloneable
 {
-
-   protected class LazySTNode<E extends Comparable<? super E>>
-   {
-      // use public access so the tree or other classes can access members
-      public LazySTNode<E> lftChild, rtChild;
-      public E data;
-      public LazySTNode<E> myRoot; // needed to test for certain error
-      public boolean deleted;
-      private Integer itemCount;
-      private SongEntry songEntry;
-      private boolean DEBUG;
-
-      public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del,
-            Integer itmCnt, SongEntry sngNtry)
-      {
-         
-            
-         lftChild = lft;
-         rtChild = rt;
-         data = d;
-         deleted = del;
-         itemCount = itmCnt;
-         songEntry = sngNtry;         
-           
-      }
-
-      public LazySTNode()
-      {
-         this(null, null, null, false, 0, null);
-      }
-
-      // function stubs -- for use only with AVL Trees when we extend
-      public int getHeight()
-      {
-         return 0;
-      }
-
-      public boolean setHeight(int height)
-      {
-         return true;
-      }
-
-      public Integer getItemCount()
-      {
-         return itemCount;
-      }
-
-      public void setItemCount(Integer itmCnt)
-      {
-         itemCount = itmCnt;
-      }
-      public void setSongEntry(SongEntry se)
-      {
-         this.data = (E) songEntry.getTitle();
-         this.songEntry = se;
-      }
-      
-      public SongEntry getSongEntry()
-      {
-         return this.songEntry;
-      }
-
-   }
+//
+//   protected class LazySTNode<E extends Comparable<? super E>>
+//   {
+//      // use public access so the tree or other classes can access members
+//      public LazySTNode<E> lftChild, rtChild;
+//      public E data;
+//      public LazySTNode<E> myRoot; // needed to test for certain error
+//      public boolean deleted;
+//      private Integer itemCount;
+//      private SongEntry songEntry;
+//      private boolean DEBUG;
+//
+//      public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del,
+//            Integer itmCnt, SongEntry sngNtry)
+//      {
+//         
+//            
+//         lftChild = lft;
+//         rtChild = rt;
+//         data = d;
+//         deleted = del;
+//         itemCount = itmCnt;
+//         songEntry = sngNtry;         
+//           
+//      }
+//
+//      public LazySTNode()
+//      {
+//         this(null, null, null, false, 0, null);
+//      }
+//
+//      // function stubs -- for use only with AVL Trees when we extend
+//      public int getHeight()
+//      {
+//         return 0;
+//      }
+//
+//      public boolean setHeight(int height)
+//      {
+//         return true;
+//      }
+//
+//      public Integer getItemCount()
+//      {
+//         return itemCount;
+//      }
+//
+//      public void setItemCount(Integer itmCnt)
+//      {
+//         itemCount = itmCnt;
+//      }
+//      public void setSongEntry(SongEntry se)
+//      {
+//         this.data = (E) songEntry.getTitle();
+//         this.songEntry = se;
+//      }
+//      
+//      public SongEntry getSongEntry()
+//      {
+//         return this.songEntry;
+//      }
+//
+//   }
 
    protected static boolean DEBUG = false;
    protected int mSize;
    protected LazySTNode<E> mRoot;
    protected int mSizeHard;
+  // LazySearchTreeTester<E> tester = new LazySearchTreeTester<>(this);
 
    public LazySearchTree()
    {
@@ -209,7 +210,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public <F extends Traverser<? super E>> void traverse(F func)
    {
-      traverse(func, mRoot);
+      traverseSoft(func, mRoot);
    }
 
    public Object clone() throws CloneNotSupportedException
@@ -331,7 +332,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          mSizeHard++;
          return new LazySTNode<E>(x, null, null, false, 1, null);
       }
-  //    System.out.println(this.mRoot.data + "11111111111111111111111111111111111" + x.compareTo(root.data));
+  
       compareResult = x.compareTo(root.data);
       if (compareResult < 0)
       {
@@ -341,7 +342,11 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       {
          root.rtChild = insert(root.rtChild, x);
       }
-      
+      if(root.deleted)
+      {
+         mSize++;
+         root.deleted = false;
+      }
       return root;
    }
    private LazySTNode<E> insert(LazySTNode<E> root, E x, SongEntry se)
@@ -355,7 +360,6 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
          mSizeHard++;
          return new LazySTNode<E>(x, null, null, false, 1, se);
       }
-//System.out.println(this.mRoot.data + "22222222222222222222222222222222222222222" + x.compareTo(root.data));
       compareResult = x.compareTo(root.data);
       if (compareResult < 0)
       {
@@ -368,7 +372,12 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       if(DEBUG)
       {
          System.out.print("Adding " );
-         showNode(root);
+        
+      }
+      if(root.deleted)
+      {
+         mSize++;
+         root.deleted = false;
       }
       return root;
    }
@@ -460,16 +469,26 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return root;
    }
 
-   protected <F extends Traverser<? super E>> void traverse(F func,
+   protected <F extends Traverser<? super E>> void traverseSoft(F printObject,
          LazySTNode<E> treeNode)
    {
       if (treeNode == null)
          return;
 
-      traverse(func, treeNode.lftChild);
+      traverseSoft(printObject, treeNode.lftChild);
       if (!treeNode.deleted)
-         func.visit(treeNode.data);
-      traverse(func, treeNode.rtChild);
+         printObject.visit(treeNode.data);
+      traverseSoft(printObject, treeNode.rtChild);
+   }
+   protected <F extends Traverser<? super E>> void traverseHard(F printObject,
+         LazySTNode<E> treeNode)
+   {
+      if (treeNode == null)
+         return;
+
+      traverseSoft(printObject, treeNode.lftChild);
+         printObject.visit(treeNode.data);
+      traverseSoft(printObject, treeNode.rtChild);
    }
 
    public LazySTNode<E> find(LazySTNode<E> root, E x)
@@ -546,56 +565,9 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
-   public void showTreeHard(LazySearchTree<E> tree)
-   {
-      System.out.println("-----------------------------");
-      System.out.println("The showTreeHard method. ");
-      if (tree.mRoot != null)
-      {
-         System.out.println("The mRoot is: " + tree.mRoot.data);
-         showTreeHard(this.mRoot);
-         System.out.print(" " + mRoot.data);
-      } else
-      {
-         System.out.println("The tree is empty");
-      }
-      System.out.println("\n-----------------------------");
-   }
-
-   protected void showTreeHard(LazySTNode<E> root)
-   {
-      if (root.lftChild != null)
-      {
-         showTreeHard(root.lftChild);
-         System.out.print(root.lftChild.data + " ");
-      }
-      if (root.rtChild != null)
-      {
-         showTreeHard(root.rtChild);
-         System.out.print(root.rtChild.data + " ");
-      }
-   }
-   public void showNode(String str)
-   {
-      LazySTNode<E> temp = findNodeByString(mRoot, str);
-      showNode(temp);
-      
-   }
    
-   public LazySTNode<E>  findNodeByString(LazySTNode<E> root, String x)
-   {
-      if(root == null)
-         return null;
-      int compareResult = x.compareTo((String) root.data);
-      if (compareResult < 0)
-         return findNodeByString(root.lftChild, x);
-      if (compareResult > 0)
-         return findNodeByString(root.rtChild, x);
-      if (compareResult == 0)
-         return root;
-      return null;
-      
-   }
+
+  
    public void addSongEntry(SongEntry se)
    {
       String title  = se.getTitle();
@@ -603,19 +575,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       insert((E) title, se);   
    }
    
-   public void showNode(LazySTNode<E> node)
-   {
-      System.out.println("\n++++++++++++++++++++++++++++++++++++++++++++++++++++");
-      System.out.println("showNode(LazySTNode<E> node) line 615 LazySearchTree");
-      System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++");
-      System.out.println("                   node.data: " + node.data);
-      System.out.println("   node.songEntry.getTitle(): " + node.getSongEntry().getTitle());
-      System.out.println("  node.songEntry.getArtist(): " + node.getSongEntry().getArtistName());
-      System.out.println("node.songEntry.getDuration(): " + node.getSongEntry().getDuration());
-      System.out.println("   node.songEntry.getGenre(): " + node.getSongEntry().getGenre());
-      System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++");
-     
-   }
+   
    
    public void setDEBUG(boolean dbg)
    {

@@ -12,18 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
- * Define the class PrintObject to implement Traverser Note: You may modify
- * class PrintObject as you see fit.
- */
-class PrintObject<E> implements Traverser<E>
-{
-   @Override
-   public void visit(E x)
-   {
-      System.out.print(x + " ");
-   }
-};
+
 
 /**
  * This class maintains an inventory of products by using a LazySearchTree of
@@ -44,7 +33,7 @@ public class SuperMarket
 
    /* Define an attribute called "inventory" of type LazySearchTree */
    static LazySearchTree<String> inventory = new LazySearchTree<>();
-   LazySearchTree<String>.LazySTNode<String> temp;
+   LazySTNode<String> temp;
    PrintObject<String> printString = new PrintObject<String>();
    static LazySearchTreeTester<String> tester = new LazySearchTreeTester<>(
          inventory);
@@ -91,7 +80,7 @@ public class SuperMarket
       }
    }
 
-   protected void printInventory(LazySearchTree<String>.LazySTNode<String> root)
+   protected void printInventory(LazySTNode<String> root)
    {
       if (root.lftChild != null)
       {
