@@ -122,7 +122,7 @@ public class MyTunes
 
    private void addSongs(LazySearchTree<SongEntry> searchResult)
    {
-      searchResult.traverse(marcher);
+      searchResult.traverseHard(marcher);
    }
 
    /**

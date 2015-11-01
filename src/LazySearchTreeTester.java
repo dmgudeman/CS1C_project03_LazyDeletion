@@ -64,6 +64,7 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
          this.showMroot();
          showTreeSoft();
          showTreeHard();
+         // showTreeHard2();
          System.out.println("=======================================\n");
       }
    }
@@ -75,7 +76,7 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
    void showTreeSoft()
    {
       System.out.println("----------Soft Tree------------------");
-      tree.traverseSoft(printObject, tree.mRoot);
+      tree.traverseSoft(printObject);
       System.out.println("\n-------------------------------------");
 
    }
@@ -87,7 +88,7 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
    void showTreeHard()
    {
       System.out.println("----------Hard Tree------------------");
-      tree.traverseHard(printObject, tree.mRoot);
+      tree.traverseHard(printObject);
       System.out.println("\n-------------------------------------");
 
    }
@@ -162,7 +163,7 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
    }
 
    // deprecated methods saved to finish testing rest of the program
-   // public void showTreeHard()
+   // public void showTreeHard2()
    // {
    // System.out.println("-----------Hard Tree------------------");
    //
@@ -176,7 +177,7 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
    // }
    // System.out.println("\n--------------------------------------");
    // }
-
+   //
    // protected void showTreeHard(LazySTNode<E> root)
    // {
    // if (root.lftChild != null)
