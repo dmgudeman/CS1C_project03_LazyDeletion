@@ -36,7 +36,7 @@ public class SuperMarket
    LazySTNode<String> temp;
    PrintObject<String> printString = new PrintObject<String>();
    static LazySearchTreeTester<String> tester = new LazySearchTreeTester<>(
-         inventory);
+         inventory, true);
    // toggles a print method that shows the state of the inventory for debugging
    static boolean testerOn = true;
 
@@ -165,10 +165,15 @@ public class SuperMarket
             // Otherwise, increment the count of the item.
             if (selection.equals("add"))
             {
+               
+               if (lineNum == 17)
+               {
+                  System.out.println("llllllllllllllllllllllllllll");
+                  tester.stateOfTree();
+               }
                market.addToInventory(itemName);
                if (SHOW_DETAILS)
                   market.printInventory("At line #" + lineNum + ": " + line);
-               if (testerOn)
                   tester.stateOfTree();
             }
 
@@ -187,7 +192,7 @@ public class SuperMarket
                   if (SHOW_DETAILS)
                      market.printInventory("At line #" + lineNum + ": " + line);
                   if (testerOn)
-                     tester.stateOfTree();
+                     tester.stateOfTreeWithShowTree();
 
                } catch (java.util.NoSuchElementException ex)
                {
@@ -217,9 +222,10 @@ public class SuperMarket
  
       if (testerOn)
       {
-         tester.stateOfTree();
+         tester.stateOfTreeWithShowTree();
+         System.out.println("-----Garbage Collection---------This should be at the end");
          inventory.collectGarbage();
-         tester.stateOfTree();
+         tester.stateOfTreeWithShowTree();
       }
    }
 

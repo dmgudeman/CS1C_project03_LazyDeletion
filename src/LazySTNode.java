@@ -10,20 +10,16 @@ public class LazySTNode<E extends Comparable<? super E>>
       public boolean deleted;
       Integer itemCount;
       SongEntry songEntry;
-      private boolean DEBUG;
 
       public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del,
             Integer itmCnt, SongEntry sngNtry)
-      {
-         
-            
+      {          
          lftChild = lft;
          rtChild = rt;
          data = d;
          deleted = del;
          itemCount = itmCnt;
-         songEntry = sngNtry;         
-           
+         songEntry = sngNtry;                   
       }
 
       public LazySTNode()

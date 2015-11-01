@@ -1,4 +1,4 @@
-public class tester
+public class LSTtest
 {
    public static void main(String[] args)
    {

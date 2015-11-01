@@ -73,6 +73,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    protected int mSize;
    protected LazySTNode<E> mRoot;
    protected int mSizeHard;
+  
 
    // LazySearchTreeTester<E> tester = new LazySearchTreeTester<>(this);
 
@@ -354,7 +355,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
       if (root.deleted)
       {
-         mSize++;
+         //mSize++;
          root.deleted = false;
       }
       return root;
