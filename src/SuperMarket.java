@@ -54,8 +54,7 @@ public class SuperMarket
          if (temp.deleted)
          {
             temp.deleted = false;
-            inventory.mSize++;
-            temp.setItemCount(1);
+            inventory.mSize++;   
          }
          temp.setItemCount(temp.getItemCount() + 1);
       } else
@@ -158,7 +157,7 @@ public class SuperMarket
 
             String selection = tokens[0];
             String itemName = tokens[1];
-            tester.stateOfTree();
+            tester.stateOfTreeWithShowTree();
             // When an item is added:
             // If the item is not in our inventory,
             // create a new entry in our inventory.
@@ -168,13 +167,23 @@ public class SuperMarket
                
                if (lineNum == 17)
                {
-                  System.out.println("llllllllllllllllllllllllllll");
-                  tester.stateOfTree();
+                  System.out.println("before add line 17 " + tokens[1] + " to inventory ");
+                  tester.stateOfTreeWithShowTree();
+                System.out.println(inventory.findMin());
+                  System.out.println(inventory.findMinHard());
                }
                market.addToInventory(itemName);
+              System.out.println(inventory.findMin());
+               
+               System.out.println(inventory.findMinHard());
                if (SHOW_DETAILS)
                   market.printInventory("At line #" + lineNum + ": " + line);
-                  tester.stateOfTree();
+               System.out.println("\nafter add " + tokens[1] + " to inventory++++++++++++++++++++++++++++++++++++ ");
+               
+               System.out.println(inventory.findMin());             
+               System.out.println(inventory.findMinHard());
+               
+               tester.stateOfTreeWithShowTree();
             }
 
             // When an item is bought:

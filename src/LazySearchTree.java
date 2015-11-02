@@ -172,6 +172,9 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public boolean containsHard(E x)
    {
+      boolean check = (findHard(mRoot, x) != null);
+      
+      System.out.println("ContainsHard " + check);
       return findHard(mRoot, x) != null;
    }
 
@@ -353,11 +356,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       {
          root.rtChild = insert(root.rtChild, x);
       }
-      if (root.deleted)
-      {
-         //mSize++;
-         root.deleted = false;
-      }
+     
       return root;
    }
 
