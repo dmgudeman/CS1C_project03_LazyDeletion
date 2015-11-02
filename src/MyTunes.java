@@ -38,7 +38,14 @@ public class MyTunes
    /* From previous project. */
    private static final double REGULAR_JUKEBOX_PRICE = 1;
    private static final boolean ENABLE_DEBUG_SELECTION = false;
-   Marcher marcher = new Marcher();
+   static Marcher marcher = new Marcher();
+   
+   Boolean DEBUG = false;
+   static FoothillTunesStore<String> store;
+   final static String jsonFilePath = "resources/music_genre_subset.json";
+//   LazySearchTreeTester tester = new LazySearchTreeTester(store.tunes2, false);
+   static LazySearchTree<SongEntry> myPurchasedTunes;
+ 
 
    /*
     * Once a user purchases a song, they can make various selections such as add
@@ -120,9 +127,32 @@ public class MyTunes
       return userInputList;
    }
 
-   private void addSongs(LazySearchTree<SongEntry> searchResult)
+   private static void addSongs(LazySearchTree<SongEntry> searchResult)
    {
       searchResult.traverseHard(marcher);
+   }
+   
+   public static LazySearchTree<SongEntry> addSong(String title, FoothillTunesStore store)
+   {
+    
+     //  MyTunes.getStore().LazysearchTree. contains(string))
+      if (store.tunes2.contains(title))
+      {
+         String temp = (String) store.tunes2.find(title);
+       
+         SongEntry songEntry = store.tunes2.find(
+               store.tunes2.mRoot, title).getSongEntry();
+         try
+         {
+         myPurchasedTunes.insert(songEntry);
+         } catch (Exception e)
+         {
+            System.out.println("songEntry in addSong is null");
+         }
+        return  myPurchasedTunes;
+         
+      }
+      return myPurchasedTunes;
    }
 
    /**
@@ -134,16 +164,18 @@ public class MyTunes
       final String tunesTestFilePath = "resources/test_tunes.txt";
 
       FoothillTunesStore store = new FoothillTunesStore(jsonFilePath);
-      LazySearchTree<SongEntry> storeTitles = store.getTitlesLT();
-      System.out.println("Welcome! We have over " + storeTitles.sizeHard()
-            + " in FoothillTunes Jukebox!");
+    //  LazySearchTree<SongEntry> storeTitles = store.getTitlesLT();
+      System.out.println("Welcome! We have over " + store.tunes2.sizeHard()
+            + " in the store!");
+      MyTunes personalTunes = new MyTunes(store);
+      System.out.println(personalTunes.getStore().tunes2.mSize);
 
-     ArrayList<String> tunesTestFile =
+    ArrayList<String> tunesTestFile =
       MyTunes.readTestFile(tunesTestFilePath);
 
       MyTunes.printMenu();
+LazySearchTreeTester myPurchasedTunesTester = new LazySearchTreeTester(myPurchasedTunes);
 
-      MyTunes personalTunes = new MyTunes(store);
      
   ArrayList<String> linesInFile = MyTunes.readTestFile(tunesTestFilePath);
       int selection = -1;
@@ -204,18 +236,29 @@ public class MyTunes
             break;
          case BUY_SONG_TITLE:
             String title = linesInFile.get(i++);
+            System.out.println("Title eeequals "+  title);
+            System.out.println((store.tunes2.find(title) != null));
             if (ENABLE_DEBUG_SELECTION)
                System.out.println("selected song title: " + title);
 
             // implement searching for songs by title
-            ArrayList<SongEntry> searchResult = store.buySongByTitle(title);
-            // LazySearchTree<SongEntry> searchResultLT =
-            // storeTitles.find(title);<<<<<<<<<<<<<<<<<<<<<<<<<<
-
+          //  ArrayList<SongEntry> searchResult = store.buySongByTitle(title);
+            System.out.println(store.tunes2.mSize);
+            if ((store.tunes2.find(title) != null))
+            {
+               System.out.println("OOOOOOOOOOOOOOOOOOO");
+           // System.out.println((personalTunes.getStore().tunes2.contains(title)));
+            addSong(title, store);
+            myPurchasedTunesTester.showTreeHard();
+            }
+            else 
+            {
+               System.out.println("NNNNNNNNNNNOOOOOOOOTTTTTTTTTT HERE");
+            }
             if (ENABLE_DEBUG_SELECTION)
             {
-               System.out.println("Found " + searchResult.size() + " song(s):");
-               System.out.println(searchResult);
+//               System.out.println("Found " + searchResultLT.size() + " song(s):");
+//               System.out.println(searchResultLT);
             }
 
             // personalTunes.addSongs(searchResult);<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

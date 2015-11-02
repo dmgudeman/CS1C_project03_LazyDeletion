@@ -172,3 +172,2079 @@ The hard list is empty.
 
 -------------------------------------
 =======================================
+
+=====PART 1 Supermarket Run without Debugging===========================
+
+At line #1: add soup
+soup:1 
+At line #2: add soup
+soup:2 
+At line #3: add milk
+soup:2 milk:1 
+At line #4: add milk
+soup:2 milk:2 
+At line #5: add apples
+soup:2 milk:2 apples:1 
+At line #6: add tomato
+soup:2 milk:2 apples:1 tomato:1 
+At line #7: add avocado
+soup:2 milk:2 apples:1 avocado:1 tomato:1 
+At line #8: add eggplant
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 tomato:1 
+At line #9: add tomato
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 tomato:2 
+At line #10: add onion
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 onion:1 tomato:2 
+At line #11: add beans
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:1 onion:1 tomato:2 
+At line #12: add beans
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 onion:1 tomato:2 
+At line #13: buy apples
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 onion:1 tomato:2 
+You tried to buy: fish 
+We have not stocked fish yet. Please contact us if you would like us to stock th
+is product.
+
+At line #15: add pie
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 onion:1 pie:1 tomato:2 
+At line #16: add tomato
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 onion:1 pie:1 tomato:3 
+At line #17: add cake
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 onion:1 pie:1 tomato:3 
+At line #18: add fish
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 fish:1 onion:1 pie:1 tomato:3 
+At line #19: add chicken
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 fish:1 onion:1 pie:1
+ tomato:3 
+At line #20: add cereal
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 fish:1 onio
+n:1 pie:1 tomato:3 
+At line #21: add cookies
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 cookies:1 f
+ish:1 onion:1 pie:1 tomato:3 
+At line #22: buy onion
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 cookies:1 f
+ish:1 pie:1 tomato:3 
+At line #23: buy pie
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 cookies:1 f
+ish:1 tomato:3 
+At line #24: buy cookies
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 fish:1 toma
+to:3 
+At line #25: add apples
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 fi
+sh:1 tomato:3 
+At line #26: add basil
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 chicken:1 cer
+eal:1 fish:1 tomato:3 
+At line #27: add juice
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 chicken:1 cer
+eal:1 fish:1 juice:1 tomato:3 
+At line #28: add juice
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 chicken:1 cer
+eal:1 fish:1 juice:2 tomato:3 
+At line #29: add bread
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:1 fish:1 juice:2 tomato:3 
+At line #30: add meat
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:3 
+At line #31: add eggplant
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:3 
+At line #32: add bread
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:3 
+At line #33: add tomato
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:4 
+At line #34: buy meat
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 tomato:4 
+At line #35: add soup
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 tomato:4 
+At line #36: add spaghetti
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 tomato:4 spaghetti:1 
+At line #37: add linguine
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 linguine:1 tomato:4 spaghetti:1 
+At line #38: add onion
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+At line #39: add cereal
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+At line #40: add milk
+soup:3 milk:3 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+At line #41: buy milk
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+At line #42: buy bread
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+At line #43: buy juice
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:2 fish:1 juice:1 linguine:1 onion:1 tomato:4 spaghetti:1 
+You tried to buy: pie 
+We are out of pie. Please contact us to get an estimate of when we will have it 
+in stock.
+
+At line #45: buy chicken
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 cerea
+l:2 fish:1 juice:1 linguine:1 onion:1 tomato:4 spaghetti:1 
+
+Number of different items in stock: 16
+
+Items in stock:
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 cerea
+l:2 fish:1 juice:1 linguine:1 onion:1 tomato:4 spaghetti:1 
+
+==========Part2 with the "testerOn" and the LazySearchTreeTester Object toggled on
+
+
+=======================================
+The findMin is null
+The findMinHard is null
+The findMax is null
+The findMaxHard is null
+The mSize is: 0
+The mSizeHard is: 0
+The mRoot is null.
+----------Soft Tree------------------
+The soft list is empty.
+
+-------------------------------------
+----------Hard Tree------------------
+The hard list is empty.
+
+-------------------------------------
+=======================================
+
+
+At line #1: add soup
+soup:1 
+after add soup to inventory++++++++++++++++++++++++++++++++++++ 
+soup
+soup
+
+=======================================
+The Min is: soup
+The MinHard is: soup
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 1
+The mSizeHard is: 1
+The mRoot is: soup
+----------Soft Tree------------------
+soup 
+-------------------------------------
+----------Hard Tree------------------
+soup 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: soup
+The MinHard is: soup
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 1
+The mSizeHard is: 1
+The mRoot is: soup
+----------Soft Tree------------------
+soup 
+-------------------------------------
+----------Hard Tree------------------
+soup 
+-------------------------------------
+=======================================
+
+
+At line #2: add soup
+soup:2 
+after add soup to inventory++++++++++++++++++++++++++++++++++++ 
+soup
+soup
+
+=======================================
+The Min is: soup
+The MinHard is: soup
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 1
+The mSizeHard is: 1
+The mRoot is: soup
+----------Soft Tree------------------
+soup 
+-------------------------------------
+----------Hard Tree------------------
+soup 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: soup
+The MinHard is: soup
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 1
+The mSizeHard is: 1
+The mRoot is: soup
+----------Soft Tree------------------
+soup 
+-------------------------------------
+----------Hard Tree------------------
+soup 
+-------------------------------------
+=======================================
+
+
+At line #3: add milk
+soup:2 milk:1 
+after add milk to inventory++++++++++++++++++++++++++++++++++++ 
+milk
+milk
+
+=======================================
+The Min is: milk
+The MinHard is: milk
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 2
+The mSizeHard is: 2
+The mRoot is: soup
+----------Soft Tree------------------
+milk soup 
+-------------------------------------
+----------Hard Tree------------------
+milk soup 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: milk
+The MinHard is: milk
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 2
+The mSizeHard is: 2
+The mRoot is: soup
+----------Soft Tree------------------
+milk soup 
+-------------------------------------
+----------Hard Tree------------------
+milk soup 
+-------------------------------------
+=======================================
+
+
+At line #4: add milk
+soup:2 milk:2 
+after add milk to inventory++++++++++++++++++++++++++++++++++++ 
+milk
+milk
+
+=======================================
+The Min is: milk
+The MinHard is: milk
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 2
+The mSizeHard is: 2
+The mRoot is: soup
+----------Soft Tree------------------
+milk soup 
+-------------------------------------
+----------Hard Tree------------------
+milk soup 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: milk
+The MinHard is: milk
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 2
+The mSizeHard is: 2
+The mRoot is: soup
+----------Soft Tree------------------
+milk soup 
+-------------------------------------
+----------Hard Tree------------------
+milk soup 
+-------------------------------------
+=======================================
+
+
+At line #5: add apples
+soup:2 milk:2 apples:1 
+after add apples to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 3
+The mSizeHard is: 3
+The mRoot is: soup
+----------Soft Tree------------------
+apples milk soup 
+-------------------------------------
+----------Hard Tree------------------
+apples milk soup 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: soup
+The MaxHard is: soup
+The mSize is: 3
+The mSizeHard is: 3
+The mRoot is: soup
+----------Soft Tree------------------
+apples milk soup 
+-------------------------------------
+----------Hard Tree------------------
+apples milk soup 
+-------------------------------------
+=======================================
+
+
+At line #6: add tomato
+soup:2 milk:2 apples:1 tomato:1 
+after add tomato to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 4
+The mSizeHard is: 4
+The mRoot is: soup
+----------Soft Tree------------------
+apples milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples milk soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 4
+The mSizeHard is: 4
+The mRoot is: soup
+----------Soft Tree------------------
+apples milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples milk soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #7: add avocado
+soup:2 milk:2 apples:1 avocado:1 tomato:1 
+after add avocado to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 5
+The mSizeHard is: 5
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado milk soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 5
+The mSizeHard is: 5
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado milk soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #8: add eggplant
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 tomato:1 
+after add eggplant to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 6
+The mSizeHard is: 6
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 6
+The mSizeHard is: 6
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #9: add tomato
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 tomato:2 
+after add tomato to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 6
+The mSizeHard is: 6
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 6
+The mSizeHard is: 6
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado eggplant milk soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #10: add onion
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 onion:1 tomato:2 
+after add onion to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 7
+The mSizeHard is: 7
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 7
+The mSizeHard is: 7
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #11: add beans
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:1 onion:1 tomato:2 
+after add beans to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #12: add beans
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 onion:1 tomato:2 
+after add beans to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #13: buy apples
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 onion:1 tomato:2 
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 7
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 7
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+You tried to buy: fish 
+We have not stocked fish yet. Please contact us if you would like us to stock th
+is product.
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 7
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 7
+The mSizeHard is: 8
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #15: add pie
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 onion:1 pie:1 tomato:2 
+after add pie to inventory++++++++++++++++++++++++++++++++++++ 
+avocado
+apples
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 9
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 9
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #16: add tomato
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 onion:1 pie:1 tomato:3 
+after add tomato to inventory++++++++++++++++++++++++++++++++++++ 
+avocado
+apples
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 9
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 9
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+before add line 17 cake to inventory 
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 8
+The mSizeHard is: 9
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans eggplant milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+avocado
+apples
+
+At line #17: add cake
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 onion:1 pie:1 tomato:3 
+after add cake to inventory++++++++++++++++++++++++++++++++++++ 
+avocado
+apples
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 9
+The mSizeHard is: 10
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake eggplant milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake eggplant milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 9
+The mSizeHard is: 10
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake eggplant milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake eggplant milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #18: add fish
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 fish:1 onion:1 pie:1 tomato:3 
+after add fish to inventory++++++++++++++++++++++++++++++++++++ 
+avocado
+apples
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 10
+The mSizeHard is: 11
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake eggplant fish milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake eggplant fish milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 10
+The mSizeHard is: 11
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake eggplant fish milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake eggplant fish milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #19: add chicken
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 fish:1 onion:1 pie:1
+ tomato:3 
+after add chicken to inventory++++++++++++++++++++++++++++++++++++ 
+avocado
+apples
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 11
+The mSizeHard is: 12
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake chicken eggplant fish milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake chicken eggplant fish milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 11
+The mSizeHard is: 12
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake chicken eggplant fish milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake chicken eggplant fish milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #20: add cereal
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 fish:1 onio
+n:1 pie:1 tomato:3 
+after add cereal to inventory++++++++++++++++++++++++++++++++++++ 
+avocado
+apples
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 12
+The mSizeHard is: 13
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken eggplant fish milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken eggplant fish milk onion pie soup tomat
+o 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 12
+The mSizeHard is: 13
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken eggplant fish milk onion pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken eggplant fish milk onion pie soup tomat
+o 
+-------------------------------------
+=======================================
+
+
+At line #21: add cookies
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 cookies:1 f
+ish:1 onion:1 pie:1 tomato:3 
+after add cookies to inventory++++++++++++++++++++++++++++++++++++ 
+avocado
+apples
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 13
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken cookies eggplant fish milk onion pie soup toma
+to 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 13
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken cookies eggplant fish milk onion pie soup toma
+to 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+At line #22: buy onion
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 cookies:1 f
+ish:1 pie:1 tomato:3 
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 12
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken cookies eggplant fish milk pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 12
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken cookies eggplant fish milk pie soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+At line #23: buy pie
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 cookies:1 f
+ish:1 tomato:3 
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 11
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken cookies eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 11
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken cookies eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+At line #24: buy cookies
+soup:2 milk:2 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 fish:1 toma
+to:3 
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 10
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: avocado
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 10
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+avocado beans cake cereal chicken eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+At line #25: add apples
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 cake:1 chicken:1 cereal:1 fi
+sh:1 tomato:3 
+after add apples to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 11
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado beans cake cereal chicken eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 11
+The mSizeHard is: 14
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado beans cake cereal chicken eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado beans cake cereal chicken cookies eggplant fish milk onion pie so
+up tomato 
+-------------------------------------
+=======================================
+
+
+At line #26: add basil
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 chicken:1 cer
+eal:1 fish:1 tomato:3 
+after add basil to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 12
+The mSizeHard is: 15
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans cake cereal chicken eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans cake cereal chicken cookies eggplant fish milk onion 
+pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 12
+The mSizeHard is: 15
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans cake cereal chicken eggplant fish milk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans cake cereal chicken cookies eggplant fish milk onion 
+pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #27: add juice
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 chicken:1 cer
+eal:1 fish:1 juice:1 tomato:3 
+after add juice to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 13
+The mSizeHard is: 16
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans cake cereal chicken eggplant fish juice milk soup tom
+ato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans cake cereal chicken cookies eggplant fish juice milk 
+onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 13
+The mSizeHard is: 16
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans cake cereal chicken eggplant fish juice milk soup tom
+ato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans cake cereal chicken cookies eggplant fish juice milk 
+onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #28: add juice
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 chicken:1 cer
+eal:1 fish:1 juice:2 tomato:3 
+after add juice to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 13
+The mSizeHard is: 16
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans cake cereal chicken eggplant fish juice milk soup tom
+ato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans cake cereal chicken cookies eggplant fish juice milk 
+onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 13
+The mSizeHard is: 16
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans cake cereal chicken eggplant fish juice milk soup tom
+ato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans cake cereal chicken cookies eggplant fish juice milk 
+onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #29: add bread
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:1 fish:1 juice:2 tomato:3 
+after add bread to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 14
+The mSizeHard is: 17
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 14
+The mSizeHard is: 17
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #30: add meat
+soup:2 milk:2 apples:1 avocado:1 eggplant:1 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:3 
+after add meat to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #31: add eggplant
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:3 
+after add eggplant to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #32: add bread
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:3 
+after add bread to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #33: add tomato
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 meat:1 tomato:4 
+after add tomato to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice meat mi
+lk soup tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #34: buy meat
+soup:2 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 tomato:4 
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 14
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 14
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #35: add soup
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 tomato:4 
+after add soup to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 14
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 14
+The mSizeHard is: 18
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup tomato 
+-------------------------------------
+=======================================
+
+
+At line #36: add spaghetti
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 tomato:4 spaghetti:1 
+after add spaghetti to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 19
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 15
+The mSizeHard is: 19
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice milk so
+up spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #37: add linguine
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 linguine:1 tomato:4 spaghetti:1 
+after add linguine to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 16
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 16
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #38: add onion
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:1 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+after add onion to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #39: add cereal
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+after add cereal to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #40: add milk
+soup:3 milk:3 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+after add milk to inventory++++++++++++++++++++++++++++++++++++ 
+apples
+apples
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #41: buy milk
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:2 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #42: buy bread
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:2 fish:1 juice:2 linguine:1 onion:1 tomato:4 spaghetti:1 
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #43: buy juice
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 chick
+en:1 cereal:2 fish:1 juice:1 linguine:1 onion:1 tomato:4 spaghetti:1 
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+You tried to buy: pie 
+We are out of pie. Please contact us to get an estimate of when we will have it 
+in stock.
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 17
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal chicken eggplant fish juice linguin
+e milk onion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+At line #45: buy chicken
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 cerea
+l:2 fish:1 juice:1 linguine:1 onion:1 tomato:4 spaghetti:1 
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 16
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal eggplant fish juice linguine milk o
+nion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+
+
+Number of different items in stock: 16
+
+Items in stock:
+soup:3 milk:2 apples:1 avocado:1 eggplant:2 beans:2 basil:1 cake:1 bread:1 cerea
+l:2 fish:1 juice:1 linguine:1 onion:1 tomato:4 spaghetti:1 
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 16
+The mSizeHard is: 20
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal eggplant fish juice linguine milk o
+nion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal chicken cookies eggplant fish juice
+ linguine meat milk onion pie soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+-----Garbage Collection---------This should be at the end
+
+=======================================
+The Min is: apples
+The MinHard is: apples
+The Max is: tomato
+The MaxHard is: tomato
+The mSize is: 16
+The mSizeHard is: 16
+The mRoot is: soup
+----------Soft Tree------------------
+apples avocado basil beans bread cake cereal eggplant fish juice linguine milk o
+nion soup spaghetti tomato 
+-------------------------------------
+----------Hard Tree------------------
+apples avocado basil beans bread cake cereal eggplant fish juice linguine milk o
+nion soup spaghetti tomato 
+-------------------------------------
+=======================================
+
+

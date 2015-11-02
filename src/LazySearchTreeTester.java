@@ -75,10 +75,14 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
     */
    void showTreeSoft()
    {
+      try {
       System.out.println("----------Soft Tree------------------");
       tree.traverseSoft(printObject);
       System.out.println("\n-------------------------------------");
-
+      } catch (Exception e)
+      {
+         System.out.println("Nothing to traverse in showTreeHard");
+      }
    }
 
    /**
@@ -87,9 +91,14 @@ public class LazySearchTreeTester<E extends Comparable<? super E>>
     */
    void showTreeHard()
    {
+      try {
       System.out.println("----------Hard Tree------------------");
       tree.traverseHard(printObject);
       System.out.println("\n-------------------------------------");
+      } catch (Exception e)
+      {
+         System.out.println("Nothing to traverse in showTreeHard");
+      }
 
    }
 

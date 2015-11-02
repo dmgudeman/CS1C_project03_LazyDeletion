@@ -69,7 +69,7 @@ public class FoothillTunesStore<E extends Comparable<? super E>> implements
                  tunes2, true);
             
             tunes2.addSongEntry(currentSong);
-          //  tester.stateOfTree();
+         //  tester.stateOfTree();
             
             
 
@@ -227,18 +227,61 @@ public class FoothillTunesStore<E extends Comparable<? super E>> implements
 
    }
 
-   public ArrayList<SongEntry> buySongByTitle(String title)
-   {
-      ArrayList<SongEntry> searchResult = new ArrayList<>();
-      // for(SongEntry se : tunes)
-      // {
-      // if (se.getTitle().equals(title))
-      // {
-      // searchResult.add(se);
-      // }
-      // }
-      return searchResult;
-   }
+//   public ArrayList<SongEntry> buySongByTitle(String title)
+//   {
+//      ArrayList<SongEntry> searchResult = new ArrayList<>();
+//      // for(SongEntry se : tunes)
+//      // {
+//      // if (se.getTitle().equals(title))
+//      // {
+//      // searchResult.add(se);
+//      // }
+//      // }
+//      return searchResult;
+//   }
+//   
+//   public LazySearchTree<E> buySongByTitle(String title)
+//   {
+//      
+//   }
+   
+  
+   
+//   private LazySTNode<E> buySongByTitle(LazySTNode<E> root, E x, SongEntry se)
+//   {
+//      
+//   }
+//   {
+//      int compareResult; // avoid multiple calls to compareTo()
+//
+//      if (root == null)
+//      {
+//
+//         mSize++;
+//         mSizeHard++;
+//         return new LazySTNode<E>(x, null, null, false, 1, se);
+//      }
+//      compareResult = x.compareTo(root.data);
+//      if (compareResult < 0)
+//      {
+//         root.lftChild = insert(root.lftChild, x, se);
+//
+//      } else if (compareResult > 0)
+//      {
+//         root.rtChild = insert(root.rtChild, x, se);
+//      }
+//      if (DEBUG)
+//      {
+//         System.out.print("Adding ");
+//
+//      }
+//      if (root.deleted)
+//      {
+//         mSize++;
+//         root.deleted = false;
+//      }
+//      return root;
+//   }
 
    @Override
    public Iterator iterator()

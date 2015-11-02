@@ -1,85 +1,40 @@
 import java.util.NoSuchElementException;
+/**
+ * This is a binary search tree the implements lazy deletion. It does this
+ * through the use of the boolean attribute "deleted" in the LazySTNode object. When
+ * an item is removed the attribute is changed to true.  Later garabage collection
+ * methods actually delete the node changing it from a soft deletion to a hard
+ * deletion, explaining the naming convention for the families of methods such
+ * as insert and remove. 
+ */
 
 import cs1c.SongEntry;
 
 public class LazySearchTree<E extends Comparable<? super E>> implements
       Cloneable
 {
-   //
-   // protected class LazySTNode<E extends Comparable<? super E>>
-   // {
-   // // use public access so the tree or other classes can access members
-   // public LazySTNode<E> lftChild, rtChild;
-   // public E data;
-   // public LazySTNode<E> myRoot; // needed to test for certain error
-   // public boolean deleted;
-   // private Integer itemCount;
-   // private SongEntry songEntry;
-   // private boolean DEBUG;
-   //
-   // public LazySTNode(E d, LazySTNode<E> lft, LazySTNode<E> rt, boolean del,
-   // Integer itmCnt, SongEntry sngNtry)
-   // {
-   //
-   //
-   // lftChild = lft;
-   // rtChild = rt;
-   // data = d;
-   // deleted = del;
-   // itemCount = itmCnt;
-   // songEntry = sngNtry;
-   //
-   // }
-   //
-   // public LazySTNode()
-   // {
-   // this(null, null, null, false, 0, null);
-   // }
-   //
-   // // function stubs -- for use only with AVL Trees when we extend
-   // public int getHeight()
-   // {
-   // return 0;
-   // }
-   //
-   // public boolean setHeight(int height)
-   // {
-   // return true;
-   // }
-   //
-   // public Integer getItemCount()
-   // {
-   // return itemCount;
-   // }
-   //
-   // public void setItemCount(Integer itmCnt)
-   // {
-   // itemCount = itmCnt;
-   // }
-   // public void setSongEntry(SongEntry se)
-   // {
-   // this.data = (E) songEntry.getTitle();
-   // this.songEntry = se;
-   // }
-   //
-   // public SongEntry getSongEntry()
-   // {
-   // return this.songEntry;
-   // }
-   //
-   // }
 
    protected static boolean DEBUG = false;
    protected int mSize;
    protected LazySTNode<E> mRoot;
    protected int mSizeHard;
-  
 
    // LazySearchTreeTester<E> tester = new LazySearchTreeTester<>(this);
 
+   /**
+    * The constructor calls the clear method which sets the mRoot to null and
+    * the mSize, mHardSizw to zero.
+    */
    public LazySearchTree()
    {
       clear();
+   }
+
+   public void clear()
+   {
+      mSize = 0;
+      mSizeHard = 0;
+      mRoot = null;
    }
 
    public boolean empty()
@@ -92,13 +47,6 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return mSize;
    }
 
-   public void clear()
-   {
-      mSize = 0;
-      mSizeHard = 0;
-      mRoot = null;
-   }
-
    public int showHeight()
    {
       return findHeight(mRoot, -1);
@@ -109,6 +57,10 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return mSizeHard;
    }
 
+   /**
+    * 
+    * @return
+    */
    public E findMin()
    {
       LazySTNode<E> resultNode;
@@ -172,9 +124,6 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    public boolean containsHard(E x)
    {
-      boolean check = (findHard(mRoot, x) != null);
-      
-      System.out.println("ContainsHard " + check);
       return findHard(mRoot, x) != null;
    }
 
@@ -199,11 +148,25 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return (mSize != oldSize);
    }
 
+   /**
+    * This is the public part of a public/protected pair of methods. It accepts
+    * no arguments but calls the protected method with the mRoot node to define
+    * the starting point of the recursive protected method of the same name.
+    */
    public void collectGarbage()
    {
       mRoot = collectGarbage(mRoot);
    }
 
+   /**
+    * This is the public part of a public/protected pair of methods. It accepts
+    * an arguments of type E. It calls the protected method, adding the mRoot
+    * node as an argument to define the starting point of the recursive
+    * protected method of the same name.
+    * 
+    * @param E
+    *           x
+    */
    public boolean removeHard(E x)
    {
       int oldSize = mSize;
@@ -213,8 +176,16 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return (mSize != oldSize);
    }
 
+   /**
+    * The public portion of a public/protected method pair. This accepts an
+    * argument of type F. Type F is a Functor class that implements the
+    * Traverser interface. It contains only one function and is designed to
+    * traverse the tree returning nodes that are not soft deleted.
+    * 
+    * @param func
+    */
    public <F extends Traverser<? super E>> void traverseSoft(F func)
-   {     
+   {
       traverseSoft(func, mRoot);
       if (mSize == 0)
          System.out.println("The soft list is empty.");
@@ -356,7 +327,7 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       {
          root.rtChild = insert(root.rtChild, x);
       }
-     
+
       return root;
    }
 
@@ -480,12 +451,21 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return root;
    }
 
+   /**
+    * The protected portion of a public/protected method pair. This accepts an
+    * argument of type F. Type F is a Functor class that implements the
+    * Traverser interface. It contains only one function and is designed to
+    * traverse the tree returning nodes that are not soft deleted.
+    * 
+    * @param func
+    * @param LazySTNode
+    *           <E>
+    */
    protected <F extends Traverser<? super E>> void traverseSoft(F printObject,
          LazySTNode<E> treeNode)
    {
       if (treeNode == null)
          return;
-
       traverseSoft(printObject, treeNode.lftChild);
       if (!treeNode.deleted)
          printObject.visit(treeNode.data);
@@ -493,6 +473,16 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
 
    }
 
+   /**
+    * The protected portion of a public/protected method pair. This accepts an
+    * argument of type F and a node. Type F is a Functor class that implements
+    * the Traverser interface. It contains only one function and is designed to
+    * traverse the tree returning nodes that are not soft deleted.
+    * 
+    * @param func
+    * @param LazySTNode
+    *           <E>
+    */
    protected <F extends Traverser<? super E>> void traverseHard(F printObject,
          LazySTNode<E> treeNode)
    {
@@ -504,7 +494,17 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       traverseHard(printObject, treeNode.rtChild);
    }
 
-   public LazySTNode<E> find(LazySTNode<E> root, E x)
+   /**
+    * The protected portion of a public/protected method pair. This accepts an
+    * argument of type E and a node. It uses the E type argument and compareTo
+    * to recursively check every node in the tree and returns it if it is not
+    * deleted.
+    * 
+    * @param func
+    * @param LazySTNode
+    *           <E>
+    */
+   protected LazySTNode<E> find(LazySTNode<E> root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
 
@@ -521,6 +521,15 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return null;
    }
 
+   /**
+    * The protected portion of a public/protected method pair. This accepts an
+    * argument of type E and a node. It uses the E type argument and compareTo
+    * to recursively check every node in the tree and returns it.
+    * 
+    * @param func
+    * @param LazySTNode
+    *           <E>
+    */
    protected LazySTNode<E> findHard(LazySTNode<E> root, E x)
    {
       int compareResult; // avoid multiple calls to compareTo()
@@ -590,13 +599,5 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
    {
       this.DEBUG = dbg;
    }
-   // class DeleteObject implements Traverser<E>
-   // {
-   // public void visit(E x)
-   // {
-   //
-   // }
-   //
-   // }
 
 }
