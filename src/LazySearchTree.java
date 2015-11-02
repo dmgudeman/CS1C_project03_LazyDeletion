@@ -57,10 +57,8 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return mSizeHard;
    }
 
-   /**
-    * 
-    * @return
-    */
+   // The public half of the different find, contains and insert methods
+   //===================================================================
    public E findMin()
    {
       LazySTNode<E> resultNode;
@@ -331,7 +329,15 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       return root;
    }
 
-   private LazySTNode<E> insert(LazySTNode<E> root, E x, SongEntry se)
+   /**
+    * The protected part of the insert method that takes into account the
+    * need to add a songEntry node to the LazySTNode
+    * @param root
+    * @param x
+    * @param se
+    * @return
+    */
+   protected LazySTNode<E> insert(LazySTNode<E> root, E x, SongEntry se)
    {
       int compareResult; // avoid multiple calls to compareTo()
 
@@ -379,6 +385,13 @@ public class LazySearchTree<E extends Comparable<? super E>> implements
       }
    }
 
+   /**
+    * Protected method of collect garbage, calls the removeHard function
+    * to do the heavy lifting of removal after this method provides the 
+    * recursive functionality to traverse the tree.
+    * @param root
+    * @return
+    */
    protected LazySTNode<E> collectGarbage(LazySTNode<E> root)
    {
       if (root == null)

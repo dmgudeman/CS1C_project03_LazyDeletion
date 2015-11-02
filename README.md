@@ -15,9 +15,11 @@ to accurately work with both states of the tree 1) with nodes present but
 the tree where the nodes were actually deleted.
 
 1) The project drove home the use of recursive methods that were necessary to 
-traverse the tree.
+traverse the tree. Lots of exposure to using those methods here.
 
-2) The use of generic classes and methods
+2) The use of generic classes and methods. Kinda unhappy with the number of 
+warnings I'm still getting, put the utility of this strategy and the 
+implementation is becoming evident.
 
 3) The use of Functor class to give more degrees of freedom passing a method
 around through the use of an interface with a class that has one method and
